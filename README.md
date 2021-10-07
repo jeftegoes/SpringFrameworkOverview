@@ -15,7 +15,7 @@ It is a small/simple example that implements Datatables "server side", in this e
 ### Front
 - JQuery
 - Datatables
-- 
+
 ### Backend
 - Dapper
 
