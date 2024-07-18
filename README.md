@@ -1,110 +1,85 @@
-## What is this projetct
+# Docker commands and overview <!-- omit in toc -->
 
-It is a small/simple example that implements Datatables "server side", in this example, shows how to call a store procedure into SqlServer(T-SQL) and return the data to frontend be to renderized by datatables using self metadata and options.
+## Contents <!-- omit in toc -->
 
-## Back-end
+- [1. What is Spring?](#1-what-is-spring)
+  - [1.1. The Problem](#11-the-problem)
+  - [1.2. Spring Boot Solution](#12-spring-boot-solution)
+  - [1.3. Spring Boot and Spring](#13-spring-boot-and-spring)
+  - [1.4. Spring Initializr](#14-spring-initializr)
+  - [1.5. Spring Boot Embedded Server](#15-spring-boot-embedded-server)
+  - [1.6. Running Spring Boot Apps](#16-running-spring-boot-apps)
+  - [1.7. Deploying Spring Boot Apps](#17-deploying-spring-boot-apps)
+  - [1.8. General questions](#18-general-questions)
 
-.Net Core 5.0 Web Mvc/Api
+# 1. What is Spring?
 
-## Front-end
+- Very popular framework for building Java applications.
+- Provides a large number of helper classes and annotations.
 
-- Html
-- Razor
+## 1.1. The Problem
 
-## Libraries used
-### Front
-- JQuery
-- Datatables
+- Building a traditional Spring application is really HARD!!!
+  - Q: Which JAR dependencies do I need?
+  - Q: How do I set up configuration (xml or Java)?
+  - Q: How do I install the server? (Tomcat, JBoss etc...)
+- And that's JUST the basics for getting started.
 
-### Backend
-- Dapper
+## 1.2. Spring Boot Solution
 
-## Database objects
-### Table
-```
-DROP TABLE Customer
-GO
-CREATE TABLE [dbo].[Customer](
-	[CustomerID] [int] IDENTITY(1,1) NOT NULL,
-	[CustomerName] [varchar](50) NULL,
-	[ContactName] [varchar](50) NULL,
-	[Address] [varchar](50) NULL,
-	[City] [varchar](50) NULL,
-	[PostalCode] [varchar](10) NULL,
-	[Country] [varchar](50) NULL
-) ON [PRIMARY]
-GO
-```
+- Make it easier to get started with Spring development.
+- Minimize the amount of manual configuration.
+  - Perform auto-configuration based on props files and JAR classpath.
+- Help to resolve dependency conflicts (Maven or Gradle).
+- Provide an embedded HTTP server so you can get started quickly.
+- Tomcat, Jetty, Undertow, ...
 
-### Mass data
-```
-TRUNCATE TABLE Customer
-DECLARE @customer INT = 0
+## 1.3. Spring Boot and Spring
 
-WHILE @customer <= 50
-BEGIN
-    DECLARE @customerStr VARCHAR(MAX) = CAST(@customer AS VARCHAR)
+- Spring Boot uses Spring behind the scenes
+- Spring Boot simply makes it easier to use Spring
 
-	INSERT INTO Customer VALUES ('Customer ' + @customerStr, 'Contact ' + @customerStr, 'Address ' + @customerStr, 'City ' + @customerStr, '1122334455', 'Country ' + @customerStr)
+## 1.4. Spring Initializr
 
-	SET @customer += 1
-END
-```
+- Quickly create a starter Spring Boot project.
+- Select your dependencies.
+- Creates a Maven/Gradle project.
+- Import the project into your IDE.
+- Eclipse, IntelliJ, NetBeans etc ...
+- [start.spring.io](https://start.spring.io/)
 
-## Procedure
-```
-DROP PROCEDURE stpGetCustomers
-GO
-CREATE PROCEDURE stpGetCustomers (	@sortColumn INT,
-									@sortOrder VARCHAR(50),
-									@offsetValue INT,
-									@pagingSize INT,
-									@searchText VARCHAR(50))
-AS
-BEGIN
-    SELECT
-		CustomerID,
-		CustomerName,
-		ContactName,
-		Address,
-		City,
-		PostalCode,
-		Country,
-		count(CustomerID) OVER () AS FilterTotalCount 
-	FROM
-		Customer
-    WHERE
-		(
-			(  
-				@searchText <> '' AND	(	
-											CustomerName LIKE '%' + @searchText + '%' OR
-											ContactName LIKE '%' + @searchText + '%'
-										)
-			) OR (@searchText = '')
-		)  
-	ORDER BY
-	CASE WHEN @sortOrder = 'Asc' THEN
-		CASE
-			WHEN @sortColumn = 1 THEN CustomerName
-			WHEN @sortColumn = 2 THEN ContactName 
-			WHEN @sortColumn = 3 THEN Address 
-			WHEN @sortColumn = 4 THEN City 
-			WHEN @sortColumn = 5 THEN PostalCode 
-		END
-	END ASC
-	, CASE WHEN @sortOrder = 'Desc' THEN
-		CASE
-			WHEN @sortColumn = 1 THEN CustomerName
-			WHEN @sortColumn = 2 THEN ContactName 
-			WHEN @sortColumn = 3 THEN Address 
-			WHEN @sortColumn = 4 THEN City 
-			WHEN @sortColumn = 5 THEN PostalCode  
-		END
-	END DESC
-	OFFSET @offsetValue ROWS
-    FETCH NEXT @pagingSize ROWS ONLY
-END
-```
+## 1.5. Spring Boot Embedded Server
 
-## Result of this project
-![ExampleDotnetDatatablesPagination](Images/FrontEnd.png)
+- Provide an embedded HTTP server so you can get started quickly.
+- Tomcat, Jetty, Undertow, ...
+- No need to install a server separately.
+- **Self-contained unit Nothing else to install!**
+
+## 1.6. Running Spring Boot Apps
+
+- Spring Boot apps can be run standalone (includes embedded server).
+- Run the Spring Boot app from the IDE or command-line.
+- `java -jar <name_jar_file>.jar`
+
+## 1.7. Deploying Spring Boot Apps
+
+- Spring Boot apps can also be deployed in the traditional way.
+- Deploy Web Application Archive (WAR) file to an external server:
+  - Tomcat, JBoss, WebSphere etc ...
+
+## 1.8. General questions
+
+- **Q: Does Spring Boot replace Spring MVC, Spring REST etc ...?**
+  - No. Instead, Spring Boot actually uses those technologies.
+    ![Spring Boot Overview](/Images/SpringBootOverview.png)
+- **Q: Does Spring Boot run code faster than regular Spring code?**
+  - No.
+  - Behind the scenes, Spring Boot uses same code of Spring Framework.
+  - Remember, Spring Boot is about making it easier to get started.
+  - Minimizing configuration etc ...
+- **Q: Do I need a special IDE for Spring Boot?**
+  - No.
+  - We can use any IDE for Spring Boot apps ... even use plain text editor.
+  - The Spring team provides free Spring Tool Suite (STS) [IDE plugins].
+  - Some IDEs provide fancy Spring tooling support.
+  - Not a requirement.
