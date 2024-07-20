@@ -6,11 +6,15 @@
   - [1.1. The Problem](#11-the-problem)
   - [1.2. Spring Boot Solution](#12-spring-boot-solution)
   - [1.3. Spring Boot and Spring](#13-spring-boot-and-spring)
-  - [1.4. Spring Initializr](#14-spring-initializr)
-  - [1.5. Spring Boot Embedded Server](#15-spring-boot-embedded-server)
-  - [1.6. Running Spring Boot Apps](#16-running-spring-boot-apps)
-  - [1.7. Deploying Spring Boot Apps](#17-deploying-spring-boot-apps)
-  - [1.8. General questions](#18-general-questions)
+  - [1.4. Spring Boot Embedded Server](#14-spring-boot-embedded-server)
+  - [1.5. Running Spring Boot Apps](#15-running-spring-boot-apps)
+  - [1.6. Deploying Spring Boot Apps](#16-deploying-spring-boot-apps)
+  - [1.7. General questions](#17-general-questions)
+- [2. Spring Initializr](#2-spring-initializr)
+  - [2.1. start.spring.io](#21-startspringio)
+  - [2.2. Spring Boot CLI](#22-spring-boot-cli)
+- [3. REST Controller](#3-rest-controller)
+- [4. Spring Projects](#4-spring-projects)
 
 # 1. What is Spring?
 
@@ -39,35 +43,26 @@
 - Spring Boot uses Spring behind the scenes
 - Spring Boot simply makes it easier to use Spring
 
-## 1.4. Spring Initializr
-
-- Quickly create a starter Spring Boot project.
-- Select your dependencies.
-- Creates a Maven/Gradle project.
-- Import the project into your IDE.
-- Eclipse, IntelliJ, NetBeans etc ...
-- [start.spring.io](https://start.spring.io/)
-
-## 1.5. Spring Boot Embedded Server
+## 1.4. Spring Boot Embedded Server
 
 - Provide an embedded HTTP server so you can get started quickly.
 - Tomcat, Jetty, Undertow, ...
 - No need to install a server separately.
 - **Self-contained unit Nothing else to install!**
 
-## 1.6. Running Spring Boot Apps
+## 1.5. Running Spring Boot Apps
 
 - Spring Boot apps can be run standalone (includes embedded server).
 - Run the Spring Boot app from the IDE or command-line.
 - `java -jar <name_jar_file>.jar`
 
-## 1.7. Deploying Spring Boot Apps
+## 1.6. Deploying Spring Boot Apps
 
 - Spring Boot apps can also be deployed in the traditional way.
 - Deploy Web Application Archive (WAR) file to an external server:
   - Tomcat, JBoss, WebSphere etc ...
 
-## 1.8. General questions
+## 1.7. General questions
 
 - **Q: Does Spring Boot replace Spring MVC, Spring REST etc ...?**
   - No. Instead, Spring Boot actually uses those technologies.
@@ -83,3 +78,38 @@
   - The Spring team provides free Spring Tool Suite (STS) [IDE plugins].
   - Some IDEs provide fancy Spring tooling support.
   - Not a requirement.
+
+# 2. Spring Initializr
+
+## 2.1. start.spring.io
+
+- Quickly create a starter Spring Boot project.
+- Select your dependencies.
+- Creates a Maven/Gradle project.
+- Import the project into your IDE.
+- Eclipse, IntelliJ, NetBeans etc ...
+- [start.spring.io](https://start.spring.io/)
+
+## 2.2. Spring Boot CLI
+
+# 3. REST Controller
+
+- Basic structure:
+  ```java
+    @RestController
+    public class HelloWorldController {
+        @GetMapping("/")
+        public String sayHello() {
+            return "Hello World!";
+        }
+    }
+  ```
+
+# 4. Spring Projects
+
+- Additional Spring modules built-on top of the core Spring Framework
+  - Only use what you need ...
+  - Spring Cloud, Spring Data.
+  - Spring Batch, Spring Security.
+  - Spring Web Services, Spring LDAP.
+  - others ...
