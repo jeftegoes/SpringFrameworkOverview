@@ -1,4 +1,4 @@
-package com.myfirstapp;
+package com.simplemavenproject;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

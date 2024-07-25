@@ -1,4 +1,4 @@
-package com.myfirstapp;
+package com.simplemavenproject;
 
 /**
  * Hello world!

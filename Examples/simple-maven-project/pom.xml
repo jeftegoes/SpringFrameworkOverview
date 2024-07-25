@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.myfirstapp</groupId>
-  <artifactId>MyFirstApp</artifactId>
+  <groupId>com.simplemavenproject</groupId>
+  <artifactId>simple-maven-project</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>MyFirstApp</name>
+  <name>simple-maven-project</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>

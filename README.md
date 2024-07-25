@@ -212,24 +212,25 @@
 
 ## 5.8. Project Coordinates
 
+- [Apache Maven - Naming Conventions](https://maven.apache.org/guides/mini/guide-naming-conventions.html)
 - Project Coordinates uniquely identify a project:
   ```xml
     <groupId>com.myfirstapp</groupId>
-    <artifactId>MyFirstApp</artifactId>
+    <artifactId>my-first-app</artifactId>
     <version>1.0-SNAPSHOT</version>
   ```
 - Elements:
   | Name | Description |
   |-------------|-----------------------------------------------------------------------------------------------------------|
   | Group ID | Name of company, group, or organization, convention is to use reverse domain name: com.myfirstapp |
-  | Artifact ID | Name for this project: myfirstapp |
+  | Artifact ID | Name for this project: my-first-app |
   | Description | A specific release version like: 1.0, 1.6, 2.0, if project is under active development then: 1.0-SNAPSHOT |
 
 ### 5.8.1. Example of Project Coordinates
 
 ```xml
   <groupId>com.myfirstapp</groupId>
-  <artifactId>MyFirstApp</artifactId>
+  <artifactId>my-first-app</artifactId>
   <version>1.0.RELEASE</version>
 ```
 
