@@ -28,7 +28,15 @@
     - [5.8.1. Example of Project Coordinates](#581-example-of-project-coordinates)
     - [5.8.2. Adding Dependencies](#582-adding-dependencies)
   - [5.9. Dependency Coordinates](#59-dependency-coordinates)
-- [6. Maven Commands](#6-maven-commands)
+- [6. Spring Boot Projects](#6-spring-boot-projects)
+  - [6.1. Maven Standard Directory Structure with Spring Boot](#61-maven-standard-directory-structure-with-spring-boot)
+  - [6.2. Maven Wrapper files](#62-maven-wrapper-files)
+  - [6.3. Maven POM file with Spring Boot](#63-maven-pom-file-with-spring-boot)
+  - [6.4. Application Properties](#64-application-properties)
+- [7. Spring Boot Starters](#7-spring-boot-starters)
+- [8. Commands](#8-commands)
+  - [8.1. Maven Commands](#81-maven-commands)
+  - [8.2. Spring commands](#82-spring-commands)
 
 # 1. What is Spring?
 
@@ -103,8 +111,13 @@
 - Import the project into your IDE.
 - Eclipse, IntelliJ, NetBeans etc ...
 - [start.spring.io](https://start.spring.io/)
+  - If we are building a Spring app that needs: Web, Security, ...
+  - Simply select the dependencies in the Spring Initializr.
+  - It will add the appropriate Spring Boot starters to your `pom.xml`.
 
 ## 2.2. Spring Boot CLI
+
+- Alternative to [start.spring.io](https://start.spring.io/).
 
 # 3. REST Controller
 
@@ -175,15 +188,6 @@
 - Not ideal for new comers and not standardized.
 - Maven solves this problem by providing a standard directory structure.
   ![Manve Standard Directory Structure](/Images/MavenStandardDirectoryStructure.png)
-
-| Directory          | Description                                                             |
-| ------------------ | ----------------------------------------------------------------------- |
-| src/main/java      | Your Java source code.                                                  |
-| src/main/resources | Properties / config files used by your app.                             |
-| src/main/webapp    | JSP files and web config files other web assets (images, css, js, etc). |
-| src/test           | Unit testing code and properties.                                       |
-| target             | Destination directory for compiled code automatically created by Maven. |
-
 - For new developers joining a project.
 - They can easily find code, properties files, unit tests, web files etc...
 - Most major IDEs have built-in support for Maven.
@@ -191,6 +195,7 @@
 - IDEs can easily read/import Maven projects.
 - Maven projects are portable.
 - Developers can easily share projects between IDEs.
+- [Simple Maven Project](/Examples/starter-maven-project/)
 
 ## 5.6. Advantages of Maven
 
@@ -278,7 +283,113 @@
   - Option 1: Visit the project page (spring.io, hibernate.org etc)
   - Option 2: Visit https://central.sonatype.com (easiest approach)
 
-# 6. Maven Commands
+# 6. Spring Boot Projects
+
+## 6.1. Maven Standard Directory Structure with Spring Boot
+
+![Maven Standard Directory Structure with Spring Boot](/Images/MavenStandardDirectoryStructureWithSpringBoot.png)
+
+## 6.2. Maven Wrapper files
+
+- `mvnw` allows you to run a Maven project.
+  - No need to have Maven installed or present on your path.
+  - If correct version of Maven is **NOT** found on your computer.
+    - **Automatically downloads** correct version and runs Maven.
+- Two files are provided:
+  - `mvnw.cmd` for MS Windows.
+    - `mvnw clean compile test`
+  - `mvnw.sh` for Linux/Mac.
+    - `./mvnw clean compile test`
+- If we already have Maven installed previously.
+  - Then we can ignore/delete the `mvnw` files.
+    ![Maven Wrapper Files](/Images/MavenWrapperFiles.png)
+- Just use Maven as you normally would.
+  - `mvn clean compile test`
+
+## 6.3. Maven POM file with Spring Boot
+
+- pom.xml includes info that you entered at Spring Initializr website.
+  ```xml
+    <groupId>com.starterspringbootproject</groupId>
+    <artifactId>starter-spring-boot-project</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  ```
+- Spring Boot Starters, a collection of Maven dependencies (Compatible versions).
+
+  ```xml
+    <dependencies>
+      ...
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+      </dependency>
+      ...
+    </dependencies>
+  ```
+
+- To package executable jar or war archive Can also easily run the app.
+  ```xml
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+      </plugins>
+    </build>
+  ```
+
+## 6.4. Application Properties
+
+- By default, Spring Boot will load properties from: `application.properties`.
+- Created by Spring Initializr.
+- Empty at the beginning.
+
+# 7. Spring Boot Starters
+
+- The Problem...
+  - Building a Spring application is really HARD!!!
+- Why Is It So Hard?
+  - It would be great if there was a simple list of Maven dependencies.
+  - Collected as a group of dependencies … one-stop shop.
+  - So I don't have to search for each dependency.
+- **Spring Boot Starters**
+  - A curated list of Maven dependencies.
+  - A collection of dependencies grouped together.
+  - Tested and verified by the Spring Development team.
+  - Makes it much easier for the developer to get started with Spring.
+  - Reduces the amount of Maven configuration.
+- There are 30+ Spring Boot Starters from the Spring Development team.
+  | Name | Description |
+  |------------------------------|---------------------------------------------------------------------------------------|
+  | spring-boot-starter-web | Building web apps, includes validation, REST. Uses Tomcat as default embedded server. |
+  | spring-boot-starter-security | Adding Spring Security support. |
+  | spring-boot-starter-data-jpa | Spring database support with JPA and Hibernate. |
+  | ... | |
+- [Full list](https://github.com/spring-projects/spring-boot/tree/main/spring-boot-project/spring-boot-starters)
+
+# 8. Commands
+
+## 8.1. Maven Commands
 
 - **Run from command prompt!**
-- `mvn archetype:generate -DgroupId=com.packagename -DartifactId=ClassName -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`
+- List of possibilities
+  - `spring init --list`
+- Create new Maven project
+  - `mvn archetype:generate -DgroupId=com.packagename -DartifactId=ClassName -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`
+- Rum Spring Boot project
+  - `mvn spring-boot:run`
+- Test...
+  - `mvn clean install -U`
+
+## 8.2. Spring commands
+
+- Create new Maven project with Spring Boot
+  - `spring init --type=maven-project --javaVersion=22 --artifactId=starter-spring-boot-project --groupId=com.starterpringbootproject`
+  - `spring init --type=maven-project --javaVersion=22 --artifactId=starter-rest-controller --groupId=com.starterrestcontroller --dependencies=web`
