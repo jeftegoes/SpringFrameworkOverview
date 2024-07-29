@@ -34,9 +34,19 @@
   - [6.3. Maven POM file with Spring Boot](#63-maven-pom-file-with-spring-boot)
   - [6.4. Application Properties](#64-application-properties)
 - [7. Spring Boot Starters](#7-spring-boot-starters)
-- [8. Commands](#8-commands)
-  - [8.1. Maven Commands](#81-maven-commands)
-  - [8.2. Spring commands](#82-spring-commands)
+- [8. Spring Boot Dev Tools](#8-spring-boot-dev-tools)
+  - [8.1. IntelliJ Community Edition - DevTools](#81-intellij-community-edition---devtools)
+- [9. Spring Boot Actuator](#9-spring-boot-actuator)
+  - [9.1. Health Endpoint](#91-health-endpoint)
+  - [9.2. Exposing Endpoints](#92-exposing-endpoints)
+  - [9.3. Info Endpoint](#93-info-endpoint)
+  - [9.4. Spring Boot Actuator Endpoints](#94-spring-boot-actuator-endpoints)
+  - [9.5. Exposing Endpoints](#95-exposing-endpoints)
+  - [9.6. Get A List of Beans](#96-get-a-list-of-beans)
+  - [9.7. Development Process](#97-development-process)
+- [10. Commands](#10-commands)
+  - [10.1. Maven Commands](#101-maven-commands)
+  - [10.2. Spring commands](#102-spring-commands)
 
 # 1. What is Spring?
 
@@ -131,6 +141,7 @@
         }
     }
   ```
+- [Example](/Examples/first-rest-controller/)
 
 # 4. Spring Projects
 
@@ -353,9 +364,9 @@
 
 # 7. Spring Boot Starters
 
-- The Problem...
+- **The Problem...**
   - Building a Spring application is really HARD!!!
-- Why Is It So Hard?
+- **Why Is It So Hard?**
   - It would be great if there was a simple list of Maven dependencies.
   - Collected as a group of dependencies … one-stop shop.
   - So I don't have to search for each dependency.
@@ -374,9 +385,130 @@
   | ... | |
 - [Full list](https://github.com/spring-projects/spring-boot/tree/main/spring-boot-project/spring-boot-starters)
 
-# 8. Commands
+# 8. Spring Boot Dev Tools
 
-## 8.1. Maven Commands
+- **The Problem...**
+  - When running Spring Boot applications.
+    - If you make changes to your source code.
+    - Then we have to manually restart your application.
+- **Solution:** Spring Boot Dev Tools.
+  - `spring-boot-devtools` to the rescue!
+  - Automatically restarts your application when code is updated.
+  - Simply add the dependency to your POM file.
+  - No need to write additional code :-).
+  - For IntelliJ, need to set additional configurations...
+- Adding the dependency to your POM file:
+  ```xml
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+  ```
+- Automatically restarts your application when code is updated.
+
+## 8.1. IntelliJ Community Edition - DevTools
+
+1. IntelliJ Community Edition does not support DevTools by default.
+
+- **Select:** File > Settings > Build, Execution, Deployment > Compiler.
+  - **Check box:** Build project automatically.
+- **Select:** File > Settings > Advanced Settings.
+- Check box: Allow auto-make to ...
+
+2. Apply IntelliJ configurations.
+3. Edit `pom.xml` and add spring-boot-devtools.
+4. Add new REST endpoint to our app.
+5. Verify the app is automatically reloaded.
+
+# 9. Spring Boot Actuator
+
+- **Problem...**
+  - How can we monitor and manage my application?
+  - How can we check the application health?
+  - How can we access application metrics?
+- **Solution: Spring Boot Actuator**
+  - Exposes endpoints to monitor and manage your application.
+  - You easily get DevOps functionality out-of-the-box.
+  - Simply add the dependency to your POM file.
+  - REST endpoints are **automatically** added to your application.
+  - No need to write additional code!
+  - You get new REST endpoints for FREE!
+  - Adding the dependency to your POM file:
+    ```xml
+      <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    ```
+- Automatically exposes endpoints for metrics out-of-the-box.
+- Endpoints are prefixed with: `/actuator`.
+
+## 9.1. Health Endpoint
+
+- `/health` checks the status of your application.
+- Normally used by monitoring apps to see if your app is up or down.
+  - Health status is customizable based on your own business logic.
+
+## 9.2. Exposing Endpoints
+
+- By default, only `/health` is exposed.
+- The `/info` endpoint can provide information about your application.
+- To expose `/info`.
+- File: `src/main/resources/application.properties`.
+  ```
+    management.endpoints.web.exposure.include=health,info
+    management.info.env.enabled=true
+  ```
+
+## 9.3. Info Endpoint
+
+- `/info` gives information about your application.
+  - Default is empty.
+- Update `application.properties` with your app info.
+- File: `src/main/resources/application.properties`
+  ```
+    info.app.name=Actuator Project
+    info.app.description=An example project using Spring Boot Actuator.
+    info.app.version=1.0.0
+  ```
+
+## 9.4. Spring Boot Actuator Endpoints
+
+- There are 10+ Spring Boot Actuator endpoints:
+  | Name | Description |
+  |--------------|----------------------------------------------------------------|
+  | /auditevents | Audit events for your application |
+  | /beans | List of all beans registered in the Spring application context |
+  | /mappings | List of all @RequestMapping paths |
+  | ... | ... |
+
+## 9.5. Exposing Endpoints
+
+- By default, only `/health` is exposed.
+- To expose all actuator endpoints over HTTP.
+- File: `src/main/resources/application.properties`
+  ```
+    # Use wildcard "*" to expose all endpoints
+    # Can also expose individual endpoints with a comma-delimited list
+    #
+    management.endpoints.web.exposure.include=*
+  ```
+
+## 9.6. Get A List of Beans
+
+- Access http://localhost:8080/actuator/beans
+
+## 9.7. Development Process
+
+1. Edit `pom.xml` and add `spring-boot-starter-acuator`.
+2. View actuator endpoints for: `/health`.
+3. Edit `application.properties` to customize `/info`.
+
+# 10. Commands
+
+## 10.1. Maven Commands
 
 - **Run from command prompt!**
 - List of possibilities
@@ -388,8 +520,8 @@
 - Test...
   - `mvn clean install -U`
 
-## 8.2. Spring commands
+## 10.2. Spring commands
 
 - Create new Maven project with Spring Boot
   - `spring init --type=maven-project --javaVersion=22 --artifactId=starter-spring-boot-project --groupId=com.starterpringbootproject`
-  - `spring init --type=maven-project --javaVersion=22 --artifactId=starter-rest-controller --groupId=com.starterrestcontroller --dependencies=web`
+  - `spring init --type=maven-project --javaVersion=22 --artifactId=starter-rest-controller --groupId=com.starterrestcontroller --dependencies=web,devtools,actuator`
