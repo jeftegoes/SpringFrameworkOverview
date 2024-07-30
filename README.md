@@ -32,7 +32,6 @@
   - [6.1. Maven Standard Directory Structure with Spring Boot](#61-maven-standard-directory-structure-with-spring-boot)
   - [6.2. Maven Wrapper files](#62-maven-wrapper-files)
   - [6.3. Maven POM file with Spring Boot](#63-maven-pom-file-with-spring-boot)
-  - [6.4. Application Properties](#64-application-properties)
 - [7. Spring Boot Starters](#7-spring-boot-starters)
 - [8. Spring Boot Dev Tools](#8-spring-boot-dev-tools)
   - [8.1. IntelliJ Community Edition - DevTools](#81-intellij-community-edition---devtools)
@@ -44,9 +43,22 @@
   - [9.5. Exposing Endpoints](#95-exposing-endpoints)
   - [9.6. Get A List of Beans](#96-get-a-list-of-beans)
   - [9.7. Development Process](#97-development-process)
-- [10. Commands](#10-commands)
-  - [10.1. Maven Commands](#101-maven-commands)
-  - [10.2. Spring commands](#102-spring-commands)
+  - [9.8. Security](#98-security)
+    - [9.8.1. Secured Endpoints](#981-secured-endpoints)
+  - [9.9. Excluding Endpoints](#99-excluding-endpoints)
+    - [9.9.1. Development Process](#991-development-process)
+  - [9.10. Actuator Example](#910-actuator-example)
+- [10. Custom Application Properties](#10-custom-application-properties)
+  - [10.1. Development Process](#101-development-process)
+  - [10.2. Spring Boot Properties](#102-spring-boot-properties)
+    - [10.2.1. Core Properties](#1021-core-properties)
+    - [10.2.2. Web Properties](#1022-web-properties)
+    - [10.2.3. Actuator Properties](#1023-actuator-properties)
+    - [10.2.4. Security Properties](#1024-security-properties)
+    - [10.2.5. Data Properties](#1025-data-properties)
+- [11. Commands - Run from Command-Line](#11-commands---run-from-command-line)
+  - [11.1. Maven Commands](#111-maven-commands)
+  - [11.2. Spring commands](#112-spring-commands)
 
 # 1. What is Spring?
 
@@ -67,7 +79,7 @@
 - Minimize the amount of manual configuration.
   - Perform auto-configuration based on props files and JAR classpath.
 - Help to resolve dependency conflicts (Maven or Gradle).
-- Provide an embedded HTTP server so you can get started quickly.
+- Provide an embedded HTTP server so we can get started quickly.
 - Tomcat, Jetty, Undertow, ...
 
 ## 1.3. Spring Boot and Spring
@@ -77,8 +89,6 @@
 
 ## 1.4. Spring Boot Embedded Server
 
-- Provide an embedded HTTP server so you can get started quickly.
-- Tomcat, Jetty, Undertow, ...
 - No need to install a server separately.
 - **Self-contained unit Nothing else to install!**
 
@@ -146,7 +156,7 @@
 # 4. Spring Projects
 
 - Additional Spring modules built-on top of the core Spring Framework
-  - Only use what you need ...
+  - Only use what we need ...
   - Spring Cloud, Spring Data.
   - Spring Batch, Spring Security.
   - Spring Web Services, Spring LDAP.
@@ -194,7 +204,7 @@
 
 ## 5.5. Standard Directory Structure
 
-- Normally when you join a new project.
+- Normally when we join a new project.
 - Each development team dreams up their own directory structure.
 - Not ideal for new comers and not standardized.
 - Maven solves this problem by providing a standard directory structure.
@@ -211,7 +221,7 @@
 ## 5.6. Advantages of Maven
 
 - Dependency Management.
-  - Maven will find JAR files for you.
+  - Maven will find JAR files for us.
   - No more missing JARs.
 - Building and Running your Project.
   - No more build path / classpath issues.
@@ -302,7 +312,7 @@
 
 ## 6.2. Maven Wrapper files
 
-- `mvnw` allows you to run a Maven project.
+- `mvnw` allows we to run a Maven project.
   - No need to have Maven installed or present on your path.
   - If correct version of Maven is **NOT** found on your computer.
     - **Automatically downloads** correct version and runs Maven.
@@ -344,7 +354,7 @@
     </dependencies>
   ```
 
-- To package executable jar or war archive Can also easily run the app.
+- To package executable `jar` or `war` archive, can also easily run the app.
   ```xml
     <build>
       <plugins>
@@ -356,19 +366,13 @@
     </build>
   ```
 
-## 6.4. Application Properties
-
-- By default, Spring Boot will load properties from: `application.properties`.
-- Created by Spring Initializr.
-- Empty at the beginning.
-
 # 7. Spring Boot Starters
 
 - **The Problem...**
   - Building a Spring application is really HARD!!!
 - **Why Is It So Hard?**
   - It would be great if there was a simple list of Maven dependencies.
-  - Collected as a group of dependencies … one-stop shop.
+  - Collected as a group of dependencies ... one-stop shop.
   - So I don't have to search for each dependency.
 - **Spring Boot Starters**
   - A curated list of Maven dependencies.
@@ -430,11 +434,11 @@
   - How can we access application metrics?
 - **Solution: Spring Boot Actuator**
   - Exposes endpoints to monitor and manage your application.
-  - You easily get DevOps functionality out-of-the-box.
+  - We easily get DevOps functionality out-of-the-box.
   - Simply add the dependency to your POM file.
   - REST endpoints are **automatically** added to your application.
   - No need to write additional code!
-  - You get new REST endpoints for FREE!
+  - We get new REST endpoints for FREE!
   - Adding the dependency to your POM file:
     ```xml
       <dependency>
@@ -506,22 +510,196 @@
 2. View actuator endpoints for: `/health`.
 3. Edit `application.properties` to customize `/info`.
 
-# 10. Commands
+## 9.8. Security
 
-## 10.1. Maven Commands
+- **What about Security?**
+  - We may **NOT** want to expose all of this information.
+- **Solution**
+  - Add Spring Security to project and endpoints are secured.
+  ```xml
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+  ```
+
+### 9.8.1. Secured Endpoints
+
+- Now when we access: `/actuator/beans`.
+  - Spring Security will prompt for login.
+  - Default user name: **user**.
+  - Check console logs for password.
+- We can override default user name and generated password.
+- File: `src/main/resources/application.properties`
+  ```
+    spring.security.user.name=jefte
+    spring.security.user.password=euamojesus
+  ```
+- We can customize Spring Security for Spring Boot Actuator.
+- Use a database for roles, encrypted passwords etc...
+
+## 9.9. Excluding Endpoints
+
+- To exclude `/health`
+- File: `src/main/resources/application.properties`
+- `management.endpoints.web.exposure.exclude=health`
+
+### 9.9.1. Development Process
+
+1. Edit `pom.xml` and add `spring-boot-starter-security`.
+2. Verify security on actuator endpoints for: `/beans` etc.
+3. Disable endpoints for `/health` and `/info`.
+
+## 9.10. Actuator Example
+
+[Actuator Example](/Examples/actuator-project/)
+
+# 10. Custom Application Properties
+
+- **Problem**
+  - You need for your app to be configurable ... no hard-coding of values.
+  - You need to read app configuration from a properties file.
+- **Solution:**
+  - Application Properties file.
+  - By default, Spring Boot reads information from a standard properties file.
+    - Located at: `src/main/resources/application.properties`
+      - Standard Spring Boot file name.
+- You can define ANY custom properties in this file.
+- Your Spring Boot app can access properties using `@Value`.
+  - No additional coding or configuration required.
+
+## 10.1. Development Process
+
+1. Define custom properties in `application.properties`.
+   1. File: `src/main/resources/application.properties`.
+   2. ```
+        books.name=Bible
+        authors.name=God
+      ```
+2. Inject properties into Spring Boot application using `@Value`.
+
+```java
+  @RestController
+  public class MyRestController {
+      @Value("${books.name}")
+      private String book;
+
+      @Value("${authors.name}")
+      private String author;
+
+      @GetMapping("/")
+      public String GetBook() {
+          return "Book: " + book + " By " + author;
+      }
+  }
+```
+
+## 10.2. Spring Boot Properties
+
+- Spring Boot can be configured in the `application.properties` file.
+- Server port, context path, actuator, security etc ...
+- Spring Boot has 1,000+ properties.
+- The properties are roughly grouped into the following categories:
+  - Core
+  - Web
+  - Security
+  - Actuator
+  - Integration
+  - DevTools
+  - Data
+  - Testing
+
+### 10.2.1. Core Properties
+
+```
+  # Log levels severity mapping
+  logging.level.org.springframework=DEBUG
+  logging.level.org.hibernate=TRACE
+  logging.level.com.myfirstapp=INFO
+
+  # Log file name
+  logging.file.name=my-crazy-stuff.log
+  logging.file.path=c:/myapps/demo
+```
+
+### 10.2.2. Web Properties
+
+```
+  # HTTP server port
+  server.port=7070
+  # Context path of the application
+  server.servlet.context-path=/my-first-app
+  # Default HTTP session time out
+  server.servlet.session.timeout=15m
+```
+
+### 10.2.3. Actuator Properties
+
+```
+  # Endpoints to include by name or wildcard
+  management.endpoints.web.exposure.include=*
+  # Endpoints to exclude by name or wildcard
+  management.endpoints.web.exposure.exclude=beans,mapping
+  # Base path for actuator endpoints
+  management.endpoints.web.base-path=/actuator
+```
+
+### 10.2.4. Security Properties
+
+```
+  # Default user name
+  spring.security.user.name=admin
+
+  # Password for default user
+  spring.security.user.password=admin@123
+```
+
+### 10.2.5. Data Properties
+
+```
+  # JDBC URL of the database
+  spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce
+
+  # Login username of the database
+  spring.datasource.username=admin
+
+  # Login password of the database
+  spring.datasource.password=admin@123
+```
+
+# 11. Commands - Run from Command-Line
+
+- During development we spend most of our time in the IDE.
+- However, we may want to run our Spring Boot app outside of the IDE.
+- One approach is running from the command-line.
+- When running from the command-line.
+- No need to have IDE open/running.
+- Since we using Spring Boot, the server is embedded in our JAR file.
+- No need to have separate server installed/running .
+- Spring Boot apps are **self-contained**.
+- Two options for running the app
+- Option 1: Use `java -jar <my_jar_file.jar>`
+- Option 2: Use Spring Boot Maven plugin
+  - `mvnw spring-boot:run`
+
+## 11.1. Maven Commands
 
 - **Run from command prompt!**
 - List of possibilities
-  - `spring init --list`
+- `spring init --list`
 - Create new Maven project
-  - `mvn archetype:generate -DgroupId=com.packagename -DartifactId=ClassName -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`
+- `mvn archetype:generate -DgroupId=com.packagename -DartifactId=ClassName -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`
 - Rum Spring Boot project
-  - `mvn spring-boot:run`
+- `mvn spring-boot:run`
 - Test...
-  - `mvn clean install -U`
+- `mvn clean install -U`
 
-## 10.2. Spring commands
+## 11.2. Spring commands
 
 - Create new Maven project with Spring Boot
-  - `spring init --type=maven-project --javaVersion=22 --artifactId=starter-spring-boot-project --groupId=com.starterpringbootproject`
-  - `spring init --type=maven-project --javaVersion=22 --artifactId=starter-rest-controller --groupId=com.starterrestcontroller --dependencies=web,devtools,actuator`
+- `spring init --type=maven-project --javaVersion=22 --artifactId=starter-spring-boot-project --groupId=com.starterpringbootproject`
+- `spring init --type=maven-project --javaVersion=22 --artifactId=starter-rest-controller --groupId=com.starterrestcontroller --dependencies=web,devtools,actuator,security`
+  - spring-boot-devtools
+  - spring-boot-starter-web
+  - spring-boot-starter-security
+  - spring-boot-starter-actuator
