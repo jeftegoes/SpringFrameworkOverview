@@ -686,13 +686,13 @@
 
 - **Run from command prompt!**
 - List of possibilities
-- `spring init --list`
+  - `spring init --list`
 - Create new Maven project
-- `mvn archetype:generate -DgroupId=com.packagename -DartifactId=ClassName -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`
+  - `mvn archetype:generate -DgroupId=com.packagename -DartifactId=ClassName -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`
 - Rum Spring Boot project
-- `mvn spring-boot:run`
+  - `mvn spring-boot:run`
 - Test...
-- `mvn clean install -U`
+  - `mvn clean install -U`
 
 ## 11.2. Spring commands
 
