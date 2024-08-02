@@ -1,20 +1,21 @@
 package com.dependencyinjection.dependency_injection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class DemoController {
+public class ConstructorInjectionController {
     private Payment payment;
 
     @Autowired
-    public DemoController(Payment payment) {
+    public ConstructorInjectionController(Payment payment) {
         this.payment = payment;
     }
 
-    @GetMapping("/payment/getName")
+    @GetMapping("/constructor/payment/getName")
     public String getPaymentName() {
-        return payment.getName();
+        return "Constructor: " + payment.getName();
     }
 }
