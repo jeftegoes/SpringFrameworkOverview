@@ -1,4 +1,4 @@
-package com.dependencyinjection.dependency_injection;
+package com.lazyinitialization;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

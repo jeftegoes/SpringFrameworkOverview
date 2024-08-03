@@ -1,4 +1,4 @@
-package com.dependencyinjection.dependency_injection;
+package com.dependencyinjection;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Primary
 public class PixPayment implements Payment {
     public String getName() {
-        return "Pix Payment";
+        return "Pix Payment.";
     }
 }

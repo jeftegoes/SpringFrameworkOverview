@@ -1,4 +1,4 @@
-package com.dependencyinjection.dependency_injection;
+package com.lazyinitialization;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

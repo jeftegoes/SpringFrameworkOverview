@@ -1,4 +1,4 @@
-package com.actuatorproject.actuator_project;
+package com.beanscopes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

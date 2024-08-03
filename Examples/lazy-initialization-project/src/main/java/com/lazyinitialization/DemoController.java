@@ -1,4 +1,4 @@
-package com.dependencyinjection.dependency_injection;
+package com.lazyinitialization;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -6,13 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class FieldInjectionController {
-    @Autowired
-    @Qualifier("cashPayment")
+public class DemoController {
     private Payment payment;
 
-    @GetMapping("/field/payment/getName")
+    @Autowired
+    public DemoController(@Qualifier("pixPayment") Payment payment) {
+        System.out.println("In constructor: " + getClass().getSimpleName());
+        this.payment = payment;
+    }
+
+    @GetMapping("/")
     public String getPaymentName() {
-        return "Field: " + payment.getName();
+        return payment.getName();
     }
 }

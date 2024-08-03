@@ -1,4 +1,4 @@
-package com.actuatorproject.actuator_project;
+package com.actuatorproject;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
