@@ -685,8 +685,6 @@
 ## 11.1. Maven Commands
 
 - **Run from command prompt!**
-- List of possibilities
-  - `spring init --list`
 - Create new Maven project
   - `mvn archetype:generate -DgroupId=com.packagename -DartifactId=ClassName -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`
 - Rum Spring Boot project
@@ -696,10 +694,12 @@
 
 ## 11.2. Spring commands
 
+- List of possibilities
+  - `spring init --list`
 - Create new Maven project with Spring Boot
-- `spring init --type=maven-project --javaVersion=22 --artifactId=starter-spring-boot-project --groupId=com.starterpringbootproject`
-- `spring init --type=maven-project --javaVersion=22 --artifactId=starter-rest-controller --groupId=com.starterrestcontroller --dependencies=web,devtools,actuator,security`
-  - spring-boot-devtools
-  - spring-boot-starter-web
-  - spring-boot-starter-security
-  - spring-boot-starter-actuator
+  - `spring init --type=maven-project --javaVersion=22 --artifactId=starter-spring-boot-project --groupId=com.starterpringbootproject`
+  - `spring init --type=maven-project --javaVersion=22 --artifactId=starter-rest-controller --groupId=com.starterrestcontroller --dependencies=web,devtools,actuator,security`
+    - spring-boot-devtools
+    - spring-boot-starter-web
+    - spring-boot-starter-security
+    - spring-boot-starter-actuator
