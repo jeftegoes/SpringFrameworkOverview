@@ -56,9 +56,32 @@
     - [10.2.3. Actuator Properties](#1023-actuator-properties)
     - [10.2.4. Security Properties](#1024-security-properties)
     - [10.2.5. Data Properties](#1025-data-properties)
-- [11. Commands - Run from Command-Line](#11-commands---run-from-command-line)
-  - [11.1. Maven Commands](#111-maven-commands)
-  - [11.2. Spring commands](#112-spring-commands)
+- [11. Inversion of Control and Dependency Injection](#11-inversion-of-control-and-dependency-injection)
+  - [11.1. Injection Types](#111-injection-types)
+    - [11.1.1. Injection Types - Which one to use?](#1111-injection-types---which-one-to-use)
+    - [11.1.2. What is Spring AutoWiring](#1112-what-is-spring-autowiring)
+  - [11.2. Autowiring Example](#112-autowiring-example)
+  - [11.3. Example Application](#113-example-application)
+  - [11.4. Development Process - Constructor Injection](#114-development-process---constructor-injection)
+  - [11.5. Spring for Enterprise applications](#115-spring-for-enterprise-applications)
+  - [11.6. Scanning for Component Classes](#116-scanning-for-component-classes)
+  - [11.7. Annotations](#117-annotations)
+  - [11.8. More on Component Scanning](#118-more-on-component-scanning)
+  - [11.9. Setter Injection](#119-setter-injection)
+  - [11.10. @Primary annotation](#1110-primary-annotation)
+    - [11.10.1. Alternate solution](#11101-alternate-solution)
+    - [11.10.2. @Primary - Only one](#11102-primary---only-one)
+    - [11.10.3. Which one: @Primary or @Qualifier?](#11103-which-one-primary-or-qualifier)
+  - [11.11. Lazy Initialization](#1111-lazy-initialization)
+    - [11.11.1. Lazy Initialization](#11111-lazy-initialization)
+    - [11.11.2. Advantages and Disadvantages](#11112-advantages-and-disadvantages)
+  - [11.12. Bean Scopes](#1112-bean-scopes)
+    - [11.12.1. Default Scope](#11121-default-scope)
+  - [11.13. Additional Spring Bean Scopes](#1113-additional-spring-bean-scopes)
+  - [11.14. Bean Lifecycle Methods - Annotations](#1114-bean-lifecycle-methods---annotations)
+- [12. Commands - Run from Command-Line](#12-commands---run-from-command-line)
+  - [12.1. Maven Commands](#121-maven-commands)
+  - [12.2. Spring commands](#122-spring-commands)
 
 # 1. What is Spring?
 
@@ -667,7 +690,200 @@
   spring.datasource.password=admin@123
 ```
 
-# 11. Commands - Run from Command-Line
+# 11. Inversion of Control and Dependency Injection
+
+[IoC and Dependency Injection](https://github.com/jeftegoes/IoCAndDependencyInjectionOverviewWithExamples)
+
+## 11.1. Injection Types
+
+- There are multiple types of injection with Spring.
+- **We will cover the two recommended types of injection**
+  - Constructor Injection
+  - Setter Injection
+
+### 11.1.1. Injection Types - Which one to use?
+
+- **Constructor Injection**
+  - Use this when you have required dependencies.
+  - Generally recommended by the spring.io development team as first choice.
+- **Setter Injection**
+  - Use this when you have optional dependencies.
+  - If dependency is not provided, your app can provide reasonable default logic.
+- **Field Injection**
+  - Not recommended by the spring.io development team.
+  - In the early days, field injection was popular on Spring projects.
+    - In recent years, it has fallen out of favor.
+  - In general, it makes the code harder to unit test.
+  - As a result, the spring.io team does not recommend field injection.
+    - However, you will still see it being used on legacy projects.
+
+### 11.1.2. What is Spring AutoWiring
+
+- For dependency injection, Spring can use `autowiring`.
+- Spring will look for a class that matches.
+  - _matches by type: class or interface._
+- Spring will inject it automatically ... hence it is `autowired`.
+
+## 11.2. Autowiring Example
+
+- Injecting a `Payment` implementation.
+- Spring will scan for `@Components`.
+- Any one implements the `Payment` interface???
+- If so, let's inject them. For example: `PixPayment`.
+
+## 11.3. Example Application
+
+![Example Application](/Images/DependencyInjectionExample.png)
+
+## 11.4. Development Process - Constructor Injection
+
+1. Define the dependency interface and class.
+2. Create Demo REST Controller.
+3. Create a constructor in your class for injections.
+4. Add `@GetMapping` for `/discount`.
+
+## 11.5. Spring for Enterprise applications
+
+- Spring is targeted for enterprise, real-time / real-world applications.
+- Spring provides features such as:
+  - Database access and Transactions.
+  - REST APIs and Web MVC.
+  - Security.
+  - etc ...
+
+## 11.6. Scanning for Component Classes
+
+- Spring will scan your Java classes for special annotations.
+  - `@Component`, etc ...
+- Automatically register the beans in the Spring container.
+
+## 11.7. Annotations
+
+- `@SpringBootApplication` is composed of the following annotations:
+  | Annotation | Description |
+  |--------------------------|------------------------------------------------------------------------------------|
+  | @EnableAutoConfiguration | Enables Spring Boot's auto-configuration support. |
+  | @ComponentScan | Enables component scanning of current package also recursively scans sub-packages. |
+  | @Configuration | Able to register extra beans with or import other configuration classes. |
+
+## 11.8. More on Component Scanning
+
+- By default, Spring Boot starts component scanning.
+  - From same package as your main Spring Boot application.
+  - Also scans sub-packages recursively.
+- This implicitly defines a base search package
+  - Allows you to leverage default component scanning.
+  - No need to explicitly reference the base package name.
+
+## 11.9. Setter Injection
+
+- Constructor Injection.
+- Setter Injection.
+- **Inject dependencies by calling setter method(s) on your class**.
+- Injecting a Payment implementation.
+- Spring will scan `@Components`
+- Any one implements Payment interface???
+- If so, let's inject them ... oops which one?
+
+## 11.10. @Primary annotation
+
+- Resolving issue with Multiple Payment implementations.
+  - In the case of multiple Payment implementations.
+    - We resolved it using `@Qualifier`
+    - We specified a payment by name.
+  - Alternate solution available...
+
+### 11.10.1. Alternate solution
+
+- Instead of specifying a payment by name using `@Qualifier`
+- I simply need a payment ... I don't care which payment
+- If there are multiple payments
+- Then we payments figure it out ... and tell me who's the `primary` payment
+
+### 11.10.2. @Primary - Only one
+
+- When using `@Primary`, can have only one for multiple implementations.
+- If you mark multiple classes with @Primary ... umm, we have a problem.
+- Mixing @Primary and @Qualifier
+- If we mix `@Primary` and `@Qualifier`
+  - `@Qualifier` has higher priority
+
+### 11.10.3. Which one: @Primary or @Qualifier?
+
+- `@Primary` leaves it up to the implementation classes.
+  - Could have the issue of multiple `@Primary` classes leading to an error.
+- `@Qualifier` allows to you be very specific on which bean you want.
+- In general, I recommend using `@Qualifier`
+  - More specific.
+  - Higher priority.
+
+## 11.11. Lazy Initialization
+
+- By default, when your application starts, all beans are initialized.
+  - `@Component`, etc ...
+- Spring will create an instance of each and make them available.
+
+### 11.11.1. Lazy Initialization
+
+- Instead of creating all beans up front, we can specify lazy initialization
+- A bean will only be initialized in the following cases:
+  - It is needed for dependency injection
+  - Or it is explicitly requested
+- Add the `@Lazy` annotation to a given class
+- To configure other beans for lazy initialization.
+- We would need to add `@Lazy` to each class.
+- Turns into tedious work for a large number of classes.
+- I wish we could set a global configuration property ...
+
+### 11.11.2. Advantages and Disadvantages
+
+- **Advantages**
+  - Only create objects as needed.
+  - May help with faster startup time if you have large number of components.
+- **Disadvantages**
+  - May not discover configuration issues until too late.
+  - If you have web related components like @RestController, not created until requested.
+  - Need to make sure you have enough memory for all beans once created.
+- **Lazy initialization feature is disabled by default.**
+- **You should profile your application before configuring lazy initialization.**
+- **Avoid the common pitfall of premature optimization.**
+
+## 11.12. Bean Scopes
+
+- Scope refers to the lifecycle of a bean.
+- How long does the bean live?
+- How many instances are created?
+- How is the bean shared?
+
+### 11.12.1. Default Scope
+
+- Default scope is singleton
+  - Refresher: What's a Singleton?
+- Spring Container creates only one instance of the bean, by default.
+- It is cached in memory.
+- All dependency injections for the bean.
+  - will reference the SAME bean.
+
+## 11.13. Additional Spring Bean Scopes
+
+| Scope       | Description                                                 |
+| ----------- | ----------------------------------------------------------- |
+| singleton   | Create a single shared instance of the bean. Default scope. |
+| prototype   | Creates a new bean instance for each container request.     |
+| request     | Scoped to an HTTP web request. Only used for web apps.      |
+| session     | Scoped to an HTTP web session. Only used for web apps.      |
+| application | Scoped to a web app ServletContext. Only used for web apps. |
+| websocket   | Scoped to a web socket. Only used for web apps.             |
+
+## 11.14. Bean Lifecycle Methods - Annotations
+
+- We could use the Amazon S3 Client in our Spring application
+- The Amazon S3 Client class was not originally annotated with @Component
+- However, we configured the S3 Client as a Spring Bean using @Bean
+- It is now a Spring Bean and we can inject it into other services of our application
+- Make an existing third-party class available to Spring framework
+
+# 12. Commands - Run from Command-Line
 
 - During development we spend most of our time in the IDE.
 - However, we may want to run our Spring Boot app outside of the IDE.
@@ -682,7 +898,7 @@
 - Option 2: Use Spring Boot Maven plugin
   - `mvnw spring-boot:run`
 
-## 11.1. Maven Commands
+## 12.1. Maven Commands
 
 - **Run from command prompt!**
 - Create new Maven project
@@ -692,7 +908,7 @@
 - Test...
   - `mvn clean install -U`
 
-## 11.2. Spring commands
+## 12.2. Spring commands
 
 - List of possibilities
   - `spring init --list`
