@@ -15,73 +15,60 @@
   - [2.2. Spring Boot CLI](#22-spring-boot-cli)
 - [3. REST Controller](#3-rest-controller)
 - [4. Spring Projects](#4-spring-projects)
-- [5. Maven](#5-maven)
-  - [5.1. Without Maven](#51-without-maven)
-  - [5.2. Maven Solution](#52-maven-solution)
-    - [5.2.1. How Maven Works](#521-how-maven-works)
-  - [5.3. Handling JAR Dependencies](#53-handling-jar-dependencies)
-  - [5.4. Building and Running](#54-building-and-running)
-  - [5.5. Standard Directory Structure](#55-standard-directory-structure)
-  - [5.6. Advantages of Maven](#56-advantages-of-maven)
-  - [5.7. POM File - pom.xml](#57-pom-file---pomxml)
-  - [5.8. Project Coordinates](#58-project-coordinates)
-    - [5.8.1. Example of Project Coordinates](#581-example-of-project-coordinates)
-    - [5.8.2. Adding Dependencies](#582-adding-dependencies)
-  - [5.9. Dependency Coordinates](#59-dependency-coordinates)
-- [6. Spring Boot Projects](#6-spring-boot-projects)
-  - [6.1. Maven Standard Directory Structure with Spring Boot](#61-maven-standard-directory-structure-with-spring-boot)
-  - [6.2. Maven Wrapper files](#62-maven-wrapper-files)
-  - [6.3. Maven POM file with Spring Boot](#63-maven-pom-file-with-spring-boot)
-- [7. Spring Boot Starters](#7-spring-boot-starters)
-- [8. Spring Boot Dev Tools](#8-spring-boot-dev-tools)
-  - [8.1. IntelliJ Community Edition - DevTools](#81-intellij-community-edition---devtools)
-- [9. Spring Boot Actuator](#9-spring-boot-actuator)
-  - [9.1. Health Endpoint](#91-health-endpoint)
-  - [9.2. Exposing Endpoints](#92-exposing-endpoints)
-  - [9.3. Info Endpoint](#93-info-endpoint)
-  - [9.4. Spring Boot Actuator Endpoints](#94-spring-boot-actuator-endpoints)
-  - [9.5. Exposing Endpoints](#95-exposing-endpoints)
-  - [9.6. Get A List of Beans](#96-get-a-list-of-beans)
-  - [9.7. Development Process](#97-development-process)
-  - [9.8. Security](#98-security)
-    - [9.8.1. Secured Endpoints](#981-secured-endpoints)
-  - [9.9. Excluding Endpoints](#99-excluding-endpoints)
-    - [9.9.1. Development Process](#991-development-process)
-  - [9.10. Actuator Example](#910-actuator-example)
-- [10. Custom Application Properties](#10-custom-application-properties)
-  - [10.1. Development Process](#101-development-process)
-  - [10.2. Spring Boot Properties](#102-spring-boot-properties)
-    - [10.2.1. Core Properties](#1021-core-properties)
-    - [10.2.2. Web Properties](#1022-web-properties)
-    - [10.2.3. Actuator Properties](#1023-actuator-properties)
-    - [10.2.4. Security Properties](#1024-security-properties)
-    - [10.2.5. Data Properties](#1025-data-properties)
-- [11. Inversion of Control and Dependency Injection](#11-inversion-of-control-and-dependency-injection)
-  - [11.1. Injection Types](#111-injection-types)
-    - [11.1.1. Injection Types - Which one to use?](#1111-injection-types---which-one-to-use)
-    - [11.1.2. What is Spring AutoWiring](#1112-what-is-spring-autowiring)
-  - [11.2. Autowiring Example](#112-autowiring-example)
-  - [11.3. Example Application](#113-example-application)
-  - [11.4. Development Process - Constructor Injection](#114-development-process---constructor-injection)
-  - [11.5. Spring for Enterprise applications](#115-spring-for-enterprise-applications)
-  - [11.6. Scanning for Component Classes](#116-scanning-for-component-classes)
-  - [11.7. Annotations](#117-annotations)
-  - [11.8. More on Component Scanning](#118-more-on-component-scanning)
-  - [11.9. Setter Injection](#119-setter-injection)
-  - [11.10. @Primary annotation](#1110-primary-annotation)
-    - [11.10.1. Alternate solution](#11101-alternate-solution)
-    - [11.10.2. @Primary - Only one](#11102-primary---only-one)
-    - [11.10.3. Which one: @Primary or @Qualifier?](#11103-which-one-primary-or-qualifier)
-  - [11.11. Lazy Initialization](#1111-lazy-initialization)
-    - [11.11.1. Lazy Initialization](#11111-lazy-initialization)
-    - [11.11.2. Advantages and Disadvantages](#11112-advantages-and-disadvantages)
-  - [11.12. Bean Scopes](#1112-bean-scopes)
-    - [11.12.1. Default Scope](#11121-default-scope)
-  - [11.13. Additional Spring Bean Scopes](#1113-additional-spring-bean-scopes)
-  - [11.14. Bean Lifecycle Methods - Annotations](#1114-bean-lifecycle-methods---annotations)
-- [12. Commands - Run from Command-Line](#12-commands---run-from-command-line)
-  - [12.1. Maven Commands](#121-maven-commands)
-  - [12.2. Spring commands](#122-spring-commands)
+- [5. Spring Boot Projects](#5-spring-boot-projects)
+  - [5.1. Maven Standard Directory Structure with Spring Boot](#51-maven-standard-directory-structure-with-spring-boot)
+  - [5.2. Maven Wrapper files](#52-maven-wrapper-files)
+  - [5.3. Maven POM file with Spring Boot](#53-maven-pom-file-with-spring-boot)
+- [6. Spring Boot Starters](#6-spring-boot-starters)
+- [7. Spring Boot Dev Tools](#7-spring-boot-dev-tools)
+  - [7.1. IntelliJ Community Edition - DevTools](#71-intellij-community-edition---devtools)
+- [8. Spring Boot Actuator](#8-spring-boot-actuator)
+  - [8.1. Health Endpoint](#81-health-endpoint)
+  - [8.2. Exposing Endpoints](#82-exposing-endpoints)
+  - [8.3. Info Endpoint](#83-info-endpoint)
+  - [8.4. Spring Boot Actuator Endpoints](#84-spring-boot-actuator-endpoints)
+  - [8.5. Exposing Endpoints](#85-exposing-endpoints)
+  - [8.6. Get A List of Beans](#86-get-a-list-of-beans)
+  - [8.7. Development Process](#87-development-process)
+  - [8.8. Security](#88-security)
+    - [8.8.1. Secured Endpoints](#881-secured-endpoints)
+  - [8.9. Excluding Endpoints](#89-excluding-endpoints)
+    - [8.9.1. Development Process](#891-development-process)
+  - [8.10. Actuator Example](#810-actuator-example)
+- [9. Custom Application Properties](#9-custom-application-properties)
+  - [9.1. Development Process](#91-development-process)
+  - [9.2. Spring Boot Properties](#92-spring-boot-properties)
+    - [9.2.1. Core Properties](#921-core-properties)
+    - [9.2.2. Web Properties](#922-web-properties)
+    - [9.2.3. Actuator Properties](#923-actuator-properties)
+    - [9.2.4. Security Properties](#924-security-properties)
+    - [9.2.5. Data Properties](#925-data-properties)
+- [10. Inversion of Control and Dependency Injection](#10-inversion-of-control-and-dependency-injection)
+  - [10.1. Injection Types](#101-injection-types)
+    - [10.1.1. Injection Types - Which one to use?](#1011-injection-types---which-one-to-use)
+    - [10.1.2. What is Spring AutoWiring](#1012-what-is-spring-autowiring)
+  - [10.2. Autowiring Example](#102-autowiring-example)
+  - [10.3. Example Application](#103-example-application)
+  - [10.4. Development Process - Constructor Injection](#104-development-process---constructor-injection)
+  - [10.5. Spring for Enterprise applications](#105-spring-for-enterprise-applications)
+  - [10.6. Scanning for Component Classes](#106-scanning-for-component-classes)
+  - [10.7. Annotations](#107-annotations)
+  - [10.8. More on Component Scanning](#108-more-on-component-scanning)
+  - [10.9. Setter Injection](#109-setter-injection)
+  - [10.10. @Primary annotation](#1010-primary-annotation)
+    - [10.10.1. Alternate solution](#10101-alternate-solution)
+    - [10.10.2. @Primary - Only one](#10102-primary---only-one)
+    - [10.10.3. Which one: @Primary or @Qualifier?](#10103-which-one-primary-or-qualifier)
+  - [10.11. Lazy Initialization](#1011-lazy-initialization)
+    - [10.11.1. Lazy Initialization](#10111-lazy-initialization)
+    - [10.11.2. Advantages and Disadvantages](#10112-advantages-and-disadvantages)
+  - [10.12. Bean Scopes](#1012-bean-scopes)
+    - [10.12.1. Default Scope](#10121-default-scope)
+  - [10.13. Additional Spring Bean Scopes](#1013-additional-spring-bean-scopes)
+  - [10.14. Bean Lifecycle Methods - Annotations](#1014-bean-lifecycle-methods---annotations)
+- [11. Commands - Run from Command-Line](#11-commands---run-from-command-line)
+  - [11.1. Maven Commands](#111-maven-commands)
+  - [11.2. Spring commands](#112-spring-commands)
 
 # 1. What is Spring?
 
@@ -185,155 +172,13 @@
   - Spring Web Services, Spring LDAP.
   - others ...
 
-# 5. Maven
+# 5. Spring Boot Projects
 
-- **What is Maven?**
-  - Maven is a Project Management tool.
-- Most popular use of Maven is for build management and dependencies.
-- **What Problems Does Maven Solve?**
-  - When building your Java project, you may need additional JAR files.
-    - For example: Spring, Hibernate, Commons Logging, JSON etc...
-- One approach is to download the JAR files from each project web site.
-- Manually add the JAR files to your build path / classpath.
-
-## 5.1. Without Maven
-
-![Without Maven](/Images/ProjectWithoutMaven.png)
-
-## 5.2. Maven Solution
-
-- Tell Maven the projects we are working with (dependencies)
-  - Spring, Hibernate etc...
-  - Maven will go out and download the JAR files for those projects for us.
-  - And Maven will make those JAR files available during compile/run.
-  - Think of Maven as your friendly helper / personal shopper.
-
-### 5.2.1. How Maven Works
-
-![How Maven Works](/Images/HowMavenWorks.png)
-
-## 5.3. Handling JAR Dependencies
-
-- When Maven retrieves a project dependency.
-- It will also download supporting dependencies.
-- For example: Spring depends on commons-logging...
-- Maven will handle this for us automagically.
-
-## 5.4. Building and Running
-
-- When you build and run your app...
-- Maven will handle class / build path for us.
-- Based on config file, Maven will add JAR files accordingly.
-
-## 5.5. Standard Directory Structure
-
-- Normally when we join a new project.
-- Each development team dreams up their own directory structure.
-- Not ideal for new comers and not standardized.
-- Maven solves this problem by providing a standard directory structure.
-  ![Manve Standard Directory Structure](/Images/MavenStandardDirectoryStructure.png)
-- For new developers joining a project.
-- They can easily find code, properties files, unit tests, web files etc...
-- Most major IDEs have built-in support for Maven.
-- Eclipse, IntelliJ, NetBeans etc.
-- IDEs can easily read/import Maven projects.
-- Maven projects are portable.
-- Developers can easily share projects between IDEs.
-- [Simple Maven Project](/Examples/starter-maven-project/)
-
-## 5.6. Advantages of Maven
-
-- Dependency Management.
-  - Maven will find JAR files for us.
-  - No more missing JARs.
-- Building and Running your Project.
-  - No more build path / classpath issues.
-- Standard directory structure.
-
-## 5.7. POM File - pom.xml
-
-- POM file = **P**roject **O**bject **M**odel file.
-- Configuration file for your project.
-  - Basically your "shopping list" for Maven.
-- Located in the root of your Maven project `pom.xml`.
-- POM File Structure:
-  ![Simple POM File](/Images/SimplePOMFile.png)
-
-## 5.8. Project Coordinates
-
-- [Apache Maven - Naming Conventions](https://maven.apache.org/guides/mini/guide-naming-conventions.html)
-- Project Coordinates uniquely identify a project:
-  ```xml
-    <groupId>com.myfirstapp</groupId>
-    <artifactId>my-first-app</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  ```
-- Elements:
-  | Name | Description |
-  |-------------|-----------------------------------------------------------------------------------------------------------|
-  | Group ID | Name of company, group, or organization, convention is to use reverse domain name: com.myfirstapp |
-  | Artifact ID | Name for this project: my-first-app |
-  | Description | A specific release version like: 1.0, 1.6, 2.0, if project is under active development then: 1.0-SNAPSHOT |
-
-### 5.8.1. Example of Project Coordinates
-
-```xml
-  <groupId>com.myfirstapp</groupId>
-  <artifactId>my-first-app</artifactId>
-  <version>1.0.RELEASE</version>
-```
-
-```xml
-  <groupId>org.springframework</groupId>
-  <artifactId>spring-context</artifactId>
-  <version>6.0.0</version>
-```
-
-```xml
-  <groupId>org.hibernate.orm</groupId>
-  <artifactId>hibernate-core</artifactId>
-  <version>6.1.4.Final</version>
-```
-
-### 5.8.2. Adding Dependencies
-
-```xml
-  <project ...>
-  ...
-  <dependencies>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>6.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate.orm</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>6.1.4.Final</version>
-    </dependency>
-  ...
-  </dependencies>
-  </project>
-```
-
-## 5.9. Dependency Coordinates
-
-- To add given dependency project, we need
-  - **Group ID**, **Artifact ID**
-  - **Version** is optional...
-    - Best practice is to include the version (repeatable builds)
-- May see this referred to as: **GAV** = **G**roup ID, **A**rtifact ID and **V**ersion.
-- How to Find Dependency Coordinates
-  - Option 1: Visit the project page (spring.io, hibernate.org etc)
-  - Option 2: Visit https://central.sonatype.com (easiest approach)
-
-# 6. Spring Boot Projects
-
-## 6.1. Maven Standard Directory Structure with Spring Boot
+## 5.1. Maven Standard Directory Structure with Spring Boot
 
 ![Maven Standard Directory Structure with Spring Boot](/Images/MavenStandardDirectoryStructureWithSpringBoot.png)
 
-## 6.2. Maven Wrapper files
+## 5.2. Maven Wrapper files
 
 - `mvnw` allows we to run a Maven project.
   - No need to have Maven installed or present on your path.
@@ -350,7 +195,7 @@
 - Just use Maven as you normally would.
   - `mvn clean compile test`
 
-## 6.3. Maven POM file with Spring Boot
+## 5.3. Maven POM file with Spring Boot
 
 - pom.xml includes info that you entered at Spring Initializr website.
   ```xml
@@ -389,7 +234,7 @@
     </build>
   ```
 
-# 7. Spring Boot Starters
+# 6. Spring Boot Starters
 
 - **The Problem...**
   - Building a Spring application is really HARD!!!
@@ -412,7 +257,7 @@
   | ... | |
 - [Full list](https://github.com/spring-projects/spring-boot/tree/main/spring-boot-project/spring-boot-starters)
 
-# 8. Spring Boot Dev Tools
+# 7. Spring Boot Dev Tools
 
 - **The Problem...**
   - When running Spring Boot applications.
@@ -435,7 +280,7 @@
   ```
 - Automatically restarts your application when code is updated.
 
-## 8.1. IntelliJ Community Edition - DevTools
+## 7.1. IntelliJ Community Edition - DevTools
 
 1. IntelliJ Community Edition does not support DevTools by default.
 
@@ -449,7 +294,7 @@
 4. Add new REST endpoint to our app.
 5. Verify the app is automatically reloaded.
 
-# 9. Spring Boot Actuator
+# 8. Spring Boot Actuator
 
 - **Problem...**
   - How can we monitor and manage my application?
@@ -472,13 +317,13 @@
 - Automatically exposes endpoints for metrics out-of-the-box.
 - Endpoints are prefixed with: `/actuator`.
 
-## 9.1. Health Endpoint
+## 8.1. Health Endpoint
 
 - `/health` checks the status of your application.
 - Normally used by monitoring apps to see if your app is up or down.
   - Health status is customizable based on your own business logic.
 
-## 9.2. Exposing Endpoints
+## 8.2. Exposing Endpoints
 
 - By default, only `/health` is exposed.
 - The `/info` endpoint can provide information about your application.
@@ -489,7 +334,7 @@
     management.info.env.enabled=true
   ```
 
-## 9.3. Info Endpoint
+## 8.3. Info Endpoint
 
 - `/info` gives information about your application.
   - Default is empty.
@@ -501,7 +346,7 @@
     info.app.version=1.0.0
   ```
 
-## 9.4. Spring Boot Actuator Endpoints
+## 8.4. Spring Boot Actuator Endpoints
 
 - There are 10+ Spring Boot Actuator endpoints:
   | Name | Description |
@@ -511,7 +356,7 @@
   | /mappings | List of all @RequestMapping paths |
   | ... | ... |
 
-## 9.5. Exposing Endpoints
+## 8.5. Exposing Endpoints
 
 - By default, only `/health` is exposed.
 - To expose all actuator endpoints over HTTP.
@@ -523,17 +368,17 @@
     management.endpoints.web.exposure.include=*
   ```
 
-## 9.6. Get A List of Beans
+## 8.6. Get A List of Beans
 
 - Access http://localhost:8080/actuator/beans
 
-## 9.7. Development Process
+## 8.7. Development Process
 
 1. Edit `pom.xml` and add `spring-boot-starter-acuator`.
 2. View actuator endpoints for: `/health`.
 3. Edit `application.properties` to customize `/info`.
 
-## 9.8. Security
+## 8.8. Security
 
 - **What about Security?**
   - We may **NOT** want to expose all of this information.
@@ -546,7 +391,7 @@
     </dependency>
   ```
 
-### 9.8.1. Secured Endpoints
+### 8.8.1. Secured Endpoints
 
 - Now when we access: `/actuator/beans`.
   - Spring Security will prompt for login.
@@ -561,23 +406,23 @@
 - We can customize Spring Security for Spring Boot Actuator.
 - Use a database for roles, encrypted passwords etc...
 
-## 9.9. Excluding Endpoints
+## 8.9. Excluding Endpoints
 
 - To exclude `/health`
 - File: `src/main/resources/application.properties`
 - `management.endpoints.web.exposure.exclude=health`
 
-### 9.9.1. Development Process
+### 8.9.1. Development Process
 
 1. Edit `pom.xml` and add `spring-boot-starter-security`.
 2. Verify security on actuator endpoints for: `/beans` etc.
 3. Disable endpoints for `/health` and `/info`.
 
-## 9.10. Actuator Example
+## 8.10. Actuator Example
 
 [Actuator Example](/Examples/actuator-project/)
 
-# 10. Custom Application Properties
+# 9. Custom Application Properties
 
 - **Problem**
   - You need for your app to be configurable ... no hard-coding of values.
@@ -591,7 +436,7 @@
 - Your Spring Boot app can access properties using `@Value`.
   - No additional coding or configuration required.
 
-## 10.1. Development Process
+## 9.1. Development Process
 
 1. Define custom properties in `application.properties`.
    1. File: `src/main/resources/application.properties`.
@@ -617,7 +462,7 @@
   }
 ```
 
-## 10.2. Spring Boot Properties
+## 9.2. Spring Boot Properties
 
 - Spring Boot can be configured in the `application.properties` file.
 - Server port, context path, actuator, security etc ...
@@ -632,7 +477,7 @@
   - Data
   - Testing
 
-### 10.2.1. Core Properties
+### 9.2.1. Core Properties
 
 ```
   # Log levels severity mapping
@@ -645,7 +490,7 @@
   logging.file.path=c:/myapps/demo
 ```
 
-### 10.2.2. Web Properties
+### 9.2.2. Web Properties
 
 ```
   # HTTP server port
@@ -656,7 +501,7 @@
   server.servlet.session.timeout=15m
 ```
 
-### 10.2.3. Actuator Properties
+### 9.2.3. Actuator Properties
 
 ```
   # Endpoints to include by name or wildcard
@@ -667,7 +512,7 @@
   management.endpoints.web.base-path=/actuator
 ```
 
-### 10.2.4. Security Properties
+### 9.2.4. Security Properties
 
 ```
   # Default user name
@@ -677,7 +522,7 @@
   spring.security.user.password=admin@123
 ```
 
-### 10.2.5. Data Properties
+### 9.2.5. Data Properties
 
 ```
   # JDBC URL of the database
@@ -690,18 +535,18 @@
   spring.datasource.password=admin@123
 ```
 
-# 11. Inversion of Control and Dependency Injection
+# 10. Inversion of Control and Dependency Injection
 
 [IoC and Dependency Injection](https://github.com/jeftegoes/IoCAndDependencyInjectionOverviewWithExamples)
 
-## 11.1. Injection Types
+## 10.1. Injection Types
 
 - There are multiple types of injection with Spring.
 - **We will cover the two recommended types of injection**
   - Constructor Injection
   - Setter Injection
 
-### 11.1.1. Injection Types - Which one to use?
+### 10.1.1. Injection Types - Which one to use?
 
 - **Constructor Injection**
   - Use this when you have required dependencies.
@@ -717,32 +562,32 @@
   - As a result, the spring.io team does not recommend field injection.
     - However, you will still see it being used on legacy projects.
 
-### 11.1.2. What is Spring AutoWiring
+### 10.1.2. What is Spring AutoWiring
 
 - For dependency injection, Spring can use `autowiring`.
 - Spring will look for a class that matches.
   - _matches by type: class or interface._
 - Spring will inject it automatically ... hence it is `autowired`.
 
-## 11.2. Autowiring Example
+## 10.2. Autowiring Example
 
 - Injecting a `Payment` implementation.
 - Spring will scan for `@Components`.
 - Any one implements the `Payment` interface???
 - If so, let's inject them. For example: `PixPayment`.
 
-## 11.3. Example Application
+## 10.3. Example Application
 
 ![Example Application](/Images/DependencyInjectionExample.png)
 
-## 11.4. Development Process - Constructor Injection
+## 10.4. Development Process - Constructor Injection
 
 1. Define the dependency interface and class.
 2. Create Demo REST Controller.
 3. Create a constructor in your class for injections.
 4. Add `@GetMapping` for `/discount`.
 
-## 11.5. Spring for Enterprise applications
+## 10.5. Spring for Enterprise applications
 
 - Spring is targeted for enterprise, real-time / real-world applications.
 - Spring provides features such as:
@@ -751,13 +596,13 @@
   - Security.
   - etc ...
 
-## 11.6. Scanning for Component Classes
+## 10.6. Scanning for Component Classes
 
 - Spring will scan your Java classes for special annotations.
   - `@Component`, etc ...
 - Automatically register the beans in the Spring container.
 
-## 11.7. Annotations
+## 10.7. Annotations
 
 - `@SpringBootApplication` is composed of the following annotations:
   | Annotation | Description |
@@ -766,7 +611,7 @@
   | @ComponentScan | Enables component scanning of current package also recursively scans sub-packages. |
   | @Configuration | Able to register extra beans with or import other configuration classes. |
 
-## 11.8. More on Component Scanning
+## 10.8. More on Component Scanning
 
 - By default, Spring Boot starts component scanning.
   - From same package as your main Spring Boot application.
@@ -775,7 +620,7 @@
   - Allows you to leverage default component scanning.
   - No need to explicitly reference the base package name.
 
-## 11.9. Setter Injection
+## 10.9. Setter Injection
 
 - Constructor Injection.
 - Setter Injection.
@@ -785,7 +630,7 @@
 - Any one implements Payment interface???
 - If so, let's inject them ... oops which one?
 
-## 11.10. @Primary annotation
+## 10.10. @Primary annotation
 
 - Resolving issue with Multiple Payment implementations.
   - In the case of multiple Payment implementations.
@@ -793,14 +638,14 @@
     - We specified a payment by name.
   - Alternate solution available...
 
-### 11.10.1. Alternate solution
+### 10.10.1. Alternate solution
 
 - Instead of specifying a payment by name using `@Qualifier`
 - I simply need a payment ... I don't care which payment
 - If there are multiple payments
 - Then we payments figure it out ... and tell me who's the `primary` payment
 
-### 11.10.2. @Primary - Only one
+### 10.10.2. @Primary - Only one
 
 - When using `@Primary`, can have only one for multiple implementations.
 - If you mark multiple classes with @Primary ... umm, we have a problem.
@@ -808,7 +653,7 @@
 - If we mix `@Primary` and `@Qualifier`
   - `@Qualifier` has higher priority
 
-### 11.10.3. Which one: @Primary or @Qualifier?
+### 10.10.3. Which one: @Primary or @Qualifier?
 
 - `@Primary` leaves it up to the implementation classes.
   - Could have the issue of multiple `@Primary` classes leading to an error.
@@ -817,13 +662,13 @@
   - More specific.
   - Higher priority.
 
-## 11.11. Lazy Initialization
+## 10.11. Lazy Initialization
 
 - By default, when your application starts, all beans are initialized.
   - `@Component`, etc ...
 - Spring will create an instance of each and make them available.
 
-### 11.11.1. Lazy Initialization
+### 10.11.1. Lazy Initialization
 
 - Instead of creating all beans up front, we can specify lazy initialization
 - A bean will only be initialized in the following cases:
@@ -835,7 +680,7 @@
 - Turns into tedious work for a large number of classes.
 - I wish we could set a global configuration property ...
 
-### 11.11.2. Advantages and Disadvantages
+### 10.11.2. Advantages and Disadvantages
 
 - **Advantages**
   - Only create objects as needed.
@@ -848,14 +693,14 @@
 - **You should profile your application before configuring lazy initialization.**
 - **Avoid the common pitfall of premature optimization.**
 
-## 11.12. Bean Scopes
+## 10.12. Bean Scopes
 
 - Scope refers to the lifecycle of a bean.
 - How long does the bean live?
 - How many instances are created?
 - How is the bean shared?
 
-### 11.12.1. Default Scope
+### 10.12.1. Default Scope
 
 - Default scope is singleton
   - Refresher: What's a Singleton?
@@ -864,7 +709,7 @@
 - All dependency injections for the bean.
   - will reference the SAME bean.
 
-## 11.13. Additional Spring Bean Scopes
+## 10.13. Additional Spring Bean Scopes
 
 | Scope       | Description                                                 |
 | ----------- | ----------------------------------------------------------- |
@@ -875,7 +720,7 @@
 | application | Scoped to a web app ServletContext. Only used for web apps. |
 | websocket   | Scoped to a web socket. Only used for web apps.             |
 
-## 11.14. Bean Lifecycle Methods - Annotations
+## 10.14. Bean Lifecycle Methods - Annotations
 
 - We could use the Amazon S3 Client in our Spring application
 - The Amazon S3 Client class was not originally annotated with @Component
@@ -883,7 +728,7 @@
 - It is now a Spring Bean and we can inject it into other services of our application
 - Make an existing third-party class available to Spring framework
 
-# 12. Commands - Run from Command-Line
+# 11. Commands - Run from Command-Line
 
 - During development we spend most of our time in the IDE.
 - However, we may want to run our Spring Boot app outside of the IDE.
@@ -898,7 +743,7 @@
 - Option 2: Use Spring Boot Maven plugin
   - `mvnw spring-boot:run`
 
-## 12.1. Maven Commands
+## 11.1. Maven Commands
 
 - **Run from command prompt!**
 - Create new Maven project
@@ -908,7 +753,7 @@
 - Test...
   - `mvn clean install -U`
 
-## 12.2. Spring commands
+## 11.2. Spring commands
 
 - List of possibilities
   - `spring init --list`
