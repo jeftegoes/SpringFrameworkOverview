@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.CsrfDsl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -36,7 +38,8 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.GET, "/api/teachers/**").hasRole("TEACHER")
                     .requestMatchers(HttpMethod.POST, "/api/teachers/").hasRole("COORDINATOR")
                     .requestMatchers(HttpMethod.PUT, "/api/teachers/**").hasRole("COORDINATOR")
-                    .requestMatchers(HttpMethod.DELETE, "/api/teachers/**").hasRole("ADMIN");
+                    .requestMatchers(HttpMethod.DELETE, "/api/teachers/**").hasRole("ADMIN")
+                    .requestMatchers("/api/users/**").permitAll();
         });
 
         httpSecurity.httpBasic(Customizer.withDefaults());
