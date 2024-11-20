@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.web.CsrfDsl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,19 +16,19 @@ public class SecurityConfig {
     public InMemoryUserDetailsManager userDetailsManager() {
         UserDetails brenno = User.builder()
                 .username("brenno")
-                .password("{noop}test123")
+                .password("{noop}master@123")
                 .roles("TEACHER")
                 .build();
 
         UserDetails barbara = User.builder()
                 .username("barbara")
-                .password("{noop}test123")
+                .password("{noop}master@123")
                 .roles("TEACHER", "COORDINATOR")
                 .build();
 
         UserDetails jefte = User.builder()
                 .username("jefte")
-                .password("{noop}test123")
+                .password("{noop}master@123")
                 .roles("TEACHER", "COORDINATOR", "ADMIN")
                 .build();
 

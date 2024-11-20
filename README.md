@@ -66,9 +66,28 @@
     - [10.12.1. Default Scope](#10121-default-scope)
   - [10.13. Additional Spring Bean Scopes](#1013-additional-spring-bean-scopes)
   - [10.14. Bean Lifecycle Methods - Annotations](#1014-bean-lifecycle-methods---annotations)
-- [11. Commands - Run from Command-Line](#11-commands---run-from-command-line)
-  - [11.1. Maven Commands](#111-maven-commands)
-  - [11.2. Spring commands](#112-spring-commands)
+- [11. Spring Security](#11-spring-security)
+  - [11.1. Servlet Filters](#111-servlet-filters)
+  - [11.2. Security Concepts](#112-security-concepts)
+  - [11.3. Declarative Security](#113-declarative-security)
+  - [11.4. Programmatic Security](#114-programmatic-security)
+  - [11.5. Enabling Spring Security](#115-enabling-spring-security)
+  - [11.6. Authentication and Authorization](#116-authentication-and-authorization)
+  - [11.7. Spring Security Password Storage](#117-spring-security-password-storage)
+  - [11.8. Restrict Access Based on Roles](#118-restrict-access-based-on-roles)
+  - [11.9. Cross-Site Request Forgery (CSRF)](#119-cross-site-request-forgery-csrf)
+    - [11.9.1. When to use CSRF Protection?](#1191-when-to-use-csrf-protection)
+  - [11.10. Database Access](#1110-database-access)
+  - [11.11. Password Storage](#1111-password-storage)
+    - [11.11.1. Password Storage - Best Practice](#11111-password-storage---best-practice)
+  - [11.12. Spring Security Team Recommendation](#1112-spring-security-team-recommendation)
+  - [11.13. How to Get a Bcrypt password](#1113-how-to-get-a-bcrypt-password)
+  - [11.14. Spring Security Password Storage](#1114-spring-security-password-storage)
+  - [11.15. Spring Security Login Process](#1115-spring-security-login-process)
+- [12. JPA](#12-jpa)
+- [13. Commands - Run from Command-Line](#13-commands---run-from-command-line)
+  - [13.1. Maven Commands](#131-maven-commands)
+  - [13.2. Spring commands](#132-spring-commands)
 
 # 1. What is Spring?
 
@@ -728,7 +747,198 @@
 - It is now a Spring Bean and we can inject it into other services of our application
 - Make an existing third-party class available to Spring framework
 
-# 11. Commands - Run from Command-Line
+# 11. Spring Security
+
+- **Spring Security Model**
+  - Spring Security defines a framework for security.
+  - Implemented using Servlet filters in the background.
+  - Two methods of securing an app: declarative and programmatic.
+
+## 11.1. Servlet Filters
+
+- Servlet Filters are used to pre-process / post-process web requests.
+- Servlet Filters can route web requests based on security logic.
+- Spring provides a bulk of security functionality with servlet filters.
+  - **Spring Security Overview**
+    ![Spring Security Overview](/Images/SpringSecurityOverview.png)
+  - **Spring Security Workflow**
+    ![Spring Security Workflow](/Images/SpringSecurityWorkflow.png)
+
+## 11.2. Security Concepts
+
+- **Authentication**
+  - Check user id and password with credentials stored in app / db.
+- **Authorization**
+  - Check to see if user has an authorized role.
+
+## 11.3. Declarative Security
+
+- Define application's security constraints in configuration.
+  - All Java config: `@Configuration`.
+- Provides separation of concerns (SoC) between application code and security.
+
+## 11.4. Programmatic Security
+
+- Spring Security provides an API for custom application coding.
+- Provides greater customization for specific app requirements.
+
+## 11.5. Enabling Spring Security
+
+1. Edit `pom.xml` and add `spring-boot-starter-security`.
+
+```xml
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+  </dependency>
+```
+
+2. This will automagically secure **all endpoints** for application.
+
+   - Now when we access our application.
+   - Spring Security will prompt for login.
+   - **Default user name:** user
+   - Check console logs for password.
+
+3. We can override default user name and generated password.
+
+- File: `src/main/resources/application.properties`
+
+```
+  spring.security.user.name=jefte
+  spring.security.user.password=master@123
+```
+
+## 11.6. Authentication and Authorization
+
+- In-memory.
+- JDBC.
+- LDAP.
+- Custom / Pluggable.
+- Others...
+
+## 11.7. Spring Security Password Storage
+
+- In Spring Security, passwords are stored using a specific format: `{id}encodedPassword`
+
+| ID     | Description             |
+| ------ | ----------------------- |
+| noop   | Plain text passwords    |
+| bcrypt | BCrypt password hashing |
+| ...    | ...                     |
+
+- **Password Example**
+  ![Password Example](/Images/PasswordExample.png)
+
+## 11.8. Restrict Access Based on Roles
+
+```sql
+  INSERT INTO `authorities`
+  VALUES
+  ('brenno', 'ROLE_TEACHER'),
+  ('barbara', 'ROLE_TEACHER'),
+  ('barbara', 'ROLE_COORDINATOR'),
+  ('jefte', 'ROLE_TEACHER'),
+  ('jefte', 'ROLE_COORDINATOR'),
+  ('jefte', 'ROLE_ADMIN');
+```
+
+## 11.9. Cross-Site Request Forgery (CSRF)
+
+- Spring Security can protect against **CSRF** attacks.
+- Embed additional authentication data/token into all HTML forms.
+- On subsequent requests, web app will verify token before processing.
+- Primary use case is traditional web applications (HTML forms etc ...).
+  ![CSRF](/Images/CSRF.png)
+
+### 11.9.1. When to use CSRF Protection?
+
+- The Spring Security team recommends.
+  - Use **CSRF** protection for any normal browser web requests.
+  - Traditional web apps with HTML forms to add/modify data.
+- If we are building a REST API for non-browser clients.
+  - We may want to disable **CSRF** protection.
+- In general, not required for stateless REST APIs.
+  - That use POST, PUT, DELETE and/or PATCH.
+- **Example**
+  ```java
+    http.csrf(csrf -> csrf.disable());
+  ```
+- In general, **CSRF** is not required for **stateless REST APIs** that use POST, PUT, DELETE and/or PATCH.
+
+## 11.10. Database Access
+
+- Spring Security can read user account info from database.
+- By default, you have to follow Spring Security's predefined table schemas.
+- Can also customize the table schemas.
+  ![Custom tables](/Images/CustomTables.png)
+- Useful if you have custom tables specific to your project / custom.
+- We will be responsible for developing the code to access the data.
+  - JDBC, JPA/Hibernate etc ...
+
+## 11.11. Password Storage
+
+- So far, our user passwords are stored in plaintext.
+  - But not for production / real-time project.
+  ```sql
+    INSERT INTO `users`
+    VALUES
+    ('brenno', '{noop}master@123', 1),
+    ('barbara', '{noop}master@123', 1),
+    ('jefte', '{noop}master@123', 1);
+  ```
+
+### 11.11.1. Password Storage - Best Practice
+
+- The best practice is store passwords in an encrypted format.
+  ```sql
+    INSERT INTO `users`
+    VALUES
+    ('brenno', '{bcrypt}$2a$10$a2eZLPE1rSQ7ZIqnD2IxPOoBedWMBgNpU.s14k7IPq6EsDixn/5SC', 1),
+    ('barbara', '{bcrypt}$2a$10$KQsIaTz9PeTB9kb3S05dhec6qhsCFjjIU/0kecWapur5V3B98vNDy', 1),
+    ('jefte', '{bcrypt}$2a$10$pexiL67R6kwy/rHOSClyZO3ZIh/uPuDoFd3EQB0WS42l1q2BDOTVm', 1);
+  ```
+
+## 11.12. Spring Security Team Recommendation
+
+- Spring Security recommends using the popular **bcrypt** algorithm.
+- **bcrypt**
+  - Performs one-way encrypted hashing.
+  - Adds a random salt to the password for additional protection.
+  - Includes support to defeat brute force attacks.
+
+## 11.13. How to Get a Bcrypt password
+
+- We have a plaintext password and you want to encrypt using bcrypt.
+  - Option 1: Use a website utility to perform the encryption.
+    - [Visit: /generate-bcrypt-password](https://bcrypt-generator.com/)
+  - Option 2: Write Java code to perform the encryption.
+
+## 11.14. Spring Security Password Storage
+
+- In Spring Security, passwords are stored using a specific format: `{bcrypt}encodedPassword`
+- **Password column must be at least 68 chars wide**
+  - `{bcrypt}` - 8 chars
+  - encodedPassword - 60 chars
+
+## 11.15. Spring Security Login Process
+
+1. Retrieve password from db for the user.
+2. Read the encoding algorithm id (bcrypt etc).
+3. For case of bcrypt, encrypt plaintext password from login form (using salt from db password).
+4. Compare encrypted password from login form WITH encrypted password from db.
+5. If there is a match, login successful.
+6. If no match, login NOT successful.
+
+- **Note: The password from db is NEVER decrypted Because bcrypt is a one-way encryption algorithm.**
+
+![Spring Security Login Process](/Images/SpringSecurityLoginProcess.png)
+
+# 12. JPA
+
+[JPA Overview and Examples](https://github.com/jeftegoes/JavaJPAOverviewAndExamples)
+
+# 13. Commands - Run from Command-Line
 
 - During development we spend most of our time in the IDE.
 - However, we may want to run our Spring Boot app outside of the IDE.
@@ -743,7 +953,7 @@
 - Option 2: Use Spring Boot Maven plugin
   - `mvnw spring-boot:run`
 
-## 11.1. Maven Commands
+## 13.1. Maven Commands
 
 - **Run from command prompt!**
 - Create new Maven project
@@ -753,7 +963,7 @@
 - Test...
   - `mvn clean install -U`
 
-## 11.2. Spring commands
+## 13.2. Spring commands
 
 - List of possibilities
   - `spring init --list`

@@ -1,0 +1,53 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.8 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.8">
+  <diagram name="Page-1" id="g6Yxzcvvr8QXobvKujEI">
+    <mxGraphModel dx="1232" dy="1187" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="WTHIGjFvw3PLQhxMG4UT-4" value="&amp;nbsp;2. Cookie is set in victim&#39;s browser.&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WTHIGjFvw3PLQhxMG4UT-1" target="WTHIGjFvw3PLQhxMG4UT-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="480" />
+              <mxPoint x="400" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WTHIGjFvw3PLQhxMG4UT-1" value="Bank Server" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.traditional_server;" vertex="1" parent="1">
+          <mxGeometry x="220" y="420" width="45" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="WTHIGjFvw3PLQhxMG4UT-3" value="&amp;nbsp;1. Victim logs into bank website.&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WTHIGjFvw3PLQhxMG4UT-2" target="WTHIGjFvw3PLQhxMG4UT-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="440" />
+              <mxPoint x="400" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WTHIGjFvw3PLQhxMG4UT-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="WTHIGjFvw3PLQhxMG4UT-2" target="WTHIGjFvw3PLQhxMG4UT-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WTHIGjFvw3PLQhxMG4UT-2" value="Victim (User)" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#00CC00;strokeColor=none;dashed=0;verticalLabelPosition=top;verticalAlign=bottom;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.user;labelPosition=center;" vertex="1" parent="1">
+          <mxGeometry x="560" y="420" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="WTHIGjFvw3PLQhxMG4UT-6" value="&amp;nbsp;3. Attacker send link (pictures, emails).&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WTHIGjFvw3PLQhxMG4UT-5" target="WTHIGjFvw3PLQhxMG4UT-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WTHIGjFvw3PLQhxMG4UT-5" value="Attacker (Hacker)" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#FF0000;strokeColor=none;dashed=0;verticalLabelPosition=top;verticalAlign=bottom;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.user;labelPosition=center;" vertex="1" parent="1">
+          <mxGeometry x="900" y="420" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="WTHIGjFvw3PLQhxMG4UT-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="WTHIGjFvw3PLQhxMG4UT-7" target="WTHIGjFvw3PLQhxMG4UT-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WTHIGjFvw3PLQhxMG4UT-7" value="4. Victim clicks on the link and malicious script executes in victim&#39;s browser." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="506" y="570" width="186" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="WTHIGjFvw3PLQhxMG4UT-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WTHIGjFvw3PLQhxMG4UT-9" target="WTHIGjFvw3PLQhxMG4UT-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WTHIGjFvw3PLQhxMG4UT-9" value="5. Money is transferred to attacker&#39;s account." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="864" y="570" width="150" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

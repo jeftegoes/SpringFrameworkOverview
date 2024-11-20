@@ -22,9 +22,9 @@ CREATE TABLE `school`.`authorities` (
 
 INSERT INTO `users`
 VALUES
-('brenno', '{noop}test123', 1),
-('barbara', '{noop}test123', 1),
-('jefte', '{noop}test123', 1);
+('brenno', '{noop}master@123', 1),
+('barbara', '{noop}master@123', 1),
+('jefte', '{noop}master@123', 1);
 
 INSERT INTO `authorities`
 VALUES
