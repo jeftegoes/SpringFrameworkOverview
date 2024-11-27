@@ -88,6 +88,7 @@
 - [13. Commands - Run from Command-Line](#13-commands---run-from-command-line)
   - [13.1. Maven Commands](#131-maven-commands)
   - [13.2. Spring commands](#132-spring-commands)
+- [14. Points of attention](#14-points-of-attention)
 
 # 1. What is Spring?
 
@@ -974,3 +975,15 @@
     - spring-boot-starter-web
     - spring-boot-starter-security
     - spring-boot-starter-actuator
+
+# 14. Points of attention
+
+- To use `ObjectMapper (com.fasterxml.jackson.core)` class without `@Bean` is necessary:
+  ```xml
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+  ```
+- **Otherwise... compilation error**
+  - Parameter 1 of constructor in com.example.SecretsManagerApplication required a bean of type 'com.fasterxml.jackson.databind.ObjectMapper' that could not be found.
