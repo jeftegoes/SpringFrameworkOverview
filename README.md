@@ -1,4 +1,4 @@
-# Docker commands and overview <!-- omit in toc -->
+# Spring Framework overview, examples and commands <!-- omit in toc -->
 
 ## Contents <!-- omit in toc -->
 
@@ -84,6 +84,7 @@
   - [11.13. How to Get a Bcrypt password](#1113-how-to-get-a-bcrypt-password)
   - [11.14. Spring Security Password Storage](#1114-spring-security-password-storage)
   - [11.15. Spring Security Login Process](#1115-spring-security-login-process)
+  - [11.16. Matchers](#1116-matchers)
 - [12. JPA](#12-jpa)
 - [13. Commands - Run from Command-Line](#13-commands---run-from-command-line)
   - [13.1. Maven Commands](#131-maven-commands)
@@ -934,6 +935,11 @@
 - **Note: The password from db is NEVER decrypted Because bcrypt is a one-way encryption algorithm.**
 
 ![Spring Security Login Process](/Images/SpringSecurityLoginProcess.png)
+
+## 11.16. Matchers
+
+- `requestMatchers("/**")`
+  - The `/**` pattern matches all routes, allowing unrestricted access.
 
 # 12. JPA
 

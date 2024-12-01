@@ -34,11 +34,16 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(configurer -> {
             configurer
-                    .requestMatchers(HttpMethod.GET, "/api/teachers/").hasRole("TEACHER")
-                    .requestMatchers(HttpMethod.GET, "/api/teachers/**").hasRole("TEACHER")
-                    .requestMatchers(HttpMethod.POST, "/api/teachers/").hasRole("COORDINATOR")
-                    .requestMatchers(HttpMethod.PUT, "/api/teachers/**").hasRole("COORDINATOR")
-                    .requestMatchers(HttpMethod.DELETE, "/api/teachers/**").hasRole("ADMIN")
+                    // By method -> route
+//                    .requestMatchers(HttpMethod.GET, "/api/teachers/").hasRole("TEACHER")
+//                    .requestMatchers(HttpMethod.GET, "/api/teachers/**").hasRole("TEACHER")
+//                    .requestMatchers(HttpMethod.POST, "/api/teachers/").hasRole("COORDINATOR")
+//                    .requestMatchers(HttpMethod.PUT, "/api/teachers/**").hasRole("COORDINATOR")
+//                    .requestMatchers(HttpMethod.DELETE, "/api/teachers/**").hasRole("ADMIN")
+//                    .requestMatchers("/api/users/**").permitAll();
+                    // By route
+                    .requestMatchers( "/api/teachers/**").hasRole("TEACHER")
+                    .requestMatchers( "/api/subjects/**").hasRole("ADMIN")
                     .requestMatchers("/api/users/**").permitAll();
         });
 
