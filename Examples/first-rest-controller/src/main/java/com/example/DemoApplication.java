@@ -1,4 +1,4 @@
-package com.firstrestcontroller.first_rest_controller;
+package com.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

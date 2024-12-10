@@ -397,6 +397,7 @@
 
 1. Edit `pom.xml` and add `spring-boot-starter-acuator`.
 2. View actuator endpoints for: `/health`.
+   - `http://localhost:8080/actuator/health`
 3. Edit `application.properties` to customize `/info`.
 
 ## 8.8. Security
