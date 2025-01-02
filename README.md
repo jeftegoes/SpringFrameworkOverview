@@ -66,30 +66,65 @@
     - [10.12.1. Default Scope](#10121-default-scope)
   - [10.13. Additional Spring Bean Scopes](#1013-additional-spring-bean-scopes)
   - [10.14. Bean Lifecycle Methods - Annotations](#1014-bean-lifecycle-methods---annotations)
-- [11. Spring Security](#11-spring-security)
-  - [11.1. Servlet Filters](#111-servlet-filters)
-  - [11.2. Security Concepts](#112-security-concepts)
-  - [11.3. Declarative Security](#113-declarative-security)
-  - [11.4. Programmatic Security](#114-programmatic-security)
-  - [11.5. Enabling Spring Security](#115-enabling-spring-security)
-  - [11.6. Authentication and Authorization](#116-authentication-and-authorization)
-  - [11.7. Spring Security Password Storage](#117-spring-security-password-storage)
-  - [11.8. Restrict Access Based on Roles](#118-restrict-access-based-on-roles)
-  - [11.9. Cross-Site Request Forgery (CSRF)](#119-cross-site-request-forgery-csrf)
-    - [11.9.1. When to use CSRF Protection?](#1191-when-to-use-csrf-protection)
-  - [11.10. Database Access](#1110-database-access)
-  - [11.11. Password Storage](#1111-password-storage)
-    - [11.11.1. Password Storage - Best Practice](#11111-password-storage---best-practice)
-  - [11.12. Spring Security Team Recommendation](#1112-spring-security-team-recommendation)
-  - [11.13. How to Get a Bcrypt password](#1113-how-to-get-a-bcrypt-password)
-  - [11.14. Spring Security Password Storage](#1114-spring-security-password-storage)
-  - [11.15. Spring Security Login Process](#1115-spring-security-login-process)
-  - [11.16. Matchers](#1116-matchers)
-- [12. JPA](#12-jpa)
-- [13. Commands - Run from Command-Line](#13-commands---run-from-command-line)
-  - [13.1. Maven Commands](#131-maven-commands)
-  - [13.2. Spring commands](#132-spring-commands)
-- [14. Points of attention](#14-points-of-attention)
+- [11. REST APIs - REST Web Services](#11-rest-apis---rest-web-services)
+  - [11.1. Questions](#111-questions)
+  - [11.2. Possible Solution](#112-possible-solution)
+  - [11.3. Response - Zip Code](#113-response---zip-code)
+  - [11.4. Multiple Client Apps](#114-multiple-client-apps)
+  - [11.5. What do we call it?](#115-what-do-we-call-it)
+- [12. JSON Basics - Syntax](#12-json-basics---syntax)
+  - [12.1. Simple JSON Example](#121-simple-json-example)
+  - [12.2. JSON Values](#122-json-values)
+  - [12.3. Nested JSON Objects](#123-nested-json-objects)
+  - [12.4. JSON Arrays](#124-json-arrays)
+- [13. REST HTTP Basics](#13-rest-http-basics)
+  - [13.1. HTTP Messages](#131-http-messages)
+    - [13.1.1. HTTP Request Message](#1311-http-request-message)
+    - [13.1.2. HTTP Response Message](#1312-http-response-message)
+  - [13.2. HTTP Response - Status Codes](#132-http-response---status-codes)
+  - [13.3. MIME Content Types](#133-mime-content-types)
+  - [13.4. Client Tool](#134-client-tool)
+    - [13.4.1. Web Browser vs Postman/Insomnia](#1341-web-browser-vs-postmaninsomnia)
+- [14. Spring REST Controller](#14-spring-rest-controller)
+  - [14.1. Add Maven Dependency](#141-add-maven-dependency)
+  - [14.2. Java JSON Data Binding](#142-java-json-data-binding)
+  - [14.3. Specialized Annotation for Services](#143-specialized-annotation-for-services)
+- [15. Spring Data REST in Spring Boot](#15-spring-data-rest-in-spring-boot)
+  - [15.1. HATEOAS](#151-hateoas)
+  - [15.2. Spring Data REST Configuration, Pagination and Sorting](#152-spring-data-rest-configuration-pagination-and-sorting)
+    - [15.2.1. REST Endpoints](#1521-rest-endpoints)
+      - [15.2.1.1. Pluralized Form](#15211-pluralized-form)
+      - [15.2.1.2. Problem](#15212-problem)
+      - [15.2.1.3. Solution](#15213-solution)
+    - [15.2.2. Pagination](#1522-pagination)
+      - [15.2.2.1. Spring Data REST Configuration](#15221-spring-data-rest-configuration)
+      - [15.2.2.2. Sample Configuration](#15222-sample-configuration)
+    - [15.2.3. Sorting](#1523-sorting)
+- [16. Spring Security](#16-spring-security)
+  - [16.1. Servlet Filters](#161-servlet-filters)
+  - [16.2. Security Concepts](#162-security-concepts)
+  - [16.3. Declarative Security](#163-declarative-security)
+  - [16.4. Programmatic Security](#164-programmatic-security)
+  - [16.5. Enabling Spring Security](#165-enabling-spring-security)
+  - [16.6. Authentication and Authorization](#166-authentication-and-authorization)
+  - [16.7. Spring Security Password Storage](#167-spring-security-password-storage)
+  - [16.8. Restrict Access Based on Roles](#168-restrict-access-based-on-roles)
+  - [16.9. Cross-Site Request Forgery (CSRF)](#169-cross-site-request-forgery-csrf)
+    - [16.9.1. When to use CSRF Protection?](#1691-when-to-use-csrf-protection)
+  - [16.10. Database Access](#1610-database-access)
+  - [16.11. Password Storage](#1611-password-storage)
+    - [16.11.1. Password Storage - Best Practice](#16111-password-storage---best-practice)
+  - [16.12. Spring Security Team Recommendation](#1612-spring-security-team-recommendation)
+  - [16.13. How to Get a Bcrypt password](#1613-how-to-get-a-bcrypt-password)
+  - [16.14. Spring Security Password Storage](#1614-spring-security-password-storage)
+  - [16.15. Spring Security Login Process](#1615-spring-security-login-process)
+  - [16.16. Matchers](#1616-matchers)
+- [17. AOP](#17-aop)
+- [18. JPA](#18-jpa)
+- [19. Commands - Run from Command-Line](#19-commands---run-from-command-line)
+  - [19.1. Maven Commands](#191-maven-commands)
+  - [19.2. Spring commands](#192-spring-commands)
+- [20. Points of attention](#20-points-of-attention)
 
 # 1. What is Spring?
 
@@ -271,7 +306,7 @@
   - Reduces the amount of Maven configuration.
 - There are 30+ Spring Boot Starters from the Spring Development team.
   | Name | Description |
-  |------------------------------|---------------------------------------------------------------------------------------|
+  | ---------------------------- | ------------------------------------------------------------------------------------- |
   | spring-boot-starter-web | Building web apps, includes validation, REST. Uses Tomcat as default embedded server. |
   | spring-boot-starter-security | Adding Spring Security support. |
   | spring-boot-starter-data-jpa | Spring database support with JPA and Hibernate. |
@@ -303,7 +338,7 @@
 
 ## 7.1. IntelliJ Community Edition - DevTools
 
-1. IntelliJ Community Edition does not support DevTools by default.
+1. IntelliJ Community Edition doesn't support DevTools by default.
 
 - **Select:** File > Settings > Build, Execution, Deployment > Compiler.
   - **Check box:** Build project automatically.
@@ -371,7 +406,7 @@
 
 - There are 10+ Spring Boot Actuator endpoints:
   | Name | Description |
-  |--------------|----------------------------------------------------------------|
+  | ------------ | -------------------------------------------------------------- |
   | /auditevents | Audit events for your application |
   | /beans | List of all beans registered in the Spring application context |
   | /mappings | List of all @RequestMapping paths |
@@ -581,7 +616,7 @@
   - In the early days, field injection was popular on Spring projects.
     - In recent years, it has fallen out of favor.
   - In general, it makes the code harder to unit test.
-  - As a result, the spring.io team does not recommend field injection.
+  - As a result, the spring.io team doesn't recommend field injection.
     - However, you will still see it being used on legacy projects.
 
 ### 10.1.2. What is Spring AutoWiring
@@ -628,7 +663,7 @@
 
 - `@SpringBootApplication` is composed of the following annotations:
   | Annotation | Description |
-  |--------------------------|------------------------------------------------------------------------------------|
+  | ------------------------ | ---------------------------------------------------------------------------------- |
   | @EnableAutoConfiguration | Enables Spring Boot's auto-configuration support. |
   | @ComponentScan | Enables component scanning of current package also recursively scans sub-packages. |
   | @Configuration | Able to register extra beans with or import other configuration classes. |
@@ -709,7 +744,7 @@
   - May help with faster startup time if you have large number of components.
 - **Disadvantages**
   - May not discover configuration issues until too late.
-  - If you have web related components like @RestController, not created until requested.
+  - If you have web related components like `@RestController`, not created until requested.
   - Need to make sure you have enough memory for all beans once created.
 - **Lazy initialization feature is disabled by default.**
 - **You should profile your application before configuring lazy initialization.**
@@ -750,14 +785,359 @@
 - It is now a Spring Bean and we can inject it into other services of our application
 - Make an existing third-party class available to Spring framework
 
-# 11. Spring Security
+# 11. REST APIs - REST Web Services
+
+- Build a client app that provides the **zip code** informations.
+- Need to get **zipc ode** data from an external service.
+  ![Cliente App Architecture](Images/ClienteAppArchitecture.png)
+
+## 11.1. Questions
+
+- **How will we connect to the Zip Code Service?**
+  - We can make [REST API](https://restfulapi.net/) calls over HTTP.
+  - REST: REpresentational State Transfer.
+  - Lightweight approach for communicating between applications.
+- **What programming language do we use?**
+  - REST is language independent.
+  - The **client** application can use **ANY** programming language.
+  - The **server** application can use **ANY** programming language.
+- **What is the data format?**
+  - REST applications can use any data format.
+  - Commonly see XML and JSON.
+  - JSON is most popular and modern.
+  - JavaScript Object Notation.
+
+## 11.2. Possible Solution
+
+- Use online zip code API provided by: [ViaCEP](https://viacep.com.br/)
+- Provide zip code data via an API.
+- Data is available in multiple formats: JSON, XML etc ...
+- The API documentation gives us the following:
+  - `https://viacep.com.br/ws/{zipcode}/json/`.
+  - Pass the **zip code** of the city.
+
+## 11.3. Response - Zip Code
+
+- The Zip Code Service responds with JSON:
+  ```json
+  {
+    "cep": "01001-000",
+    "logradouro": "Praça da Sé",
+    "complemento": "lado ímpar",
+    "unidade": "",
+    "bairro": "Sé",
+    "localidade": "São Paulo",
+    "uf": "SP",
+    "estado": "São Paulo",
+    "regiao": "Sudeste",
+    "ibge": "3550308",
+    "gia": "1004",
+    "ddd": "11",
+    "siafi": "7107"
+  }
+  ```
+
+## 11.4. Multiple Client Apps
+
+- Remember:
+  - REST calls can be made over HTTP.
+  - REST is language independent.
+    ![Multiple Client Apps](Images/MultipleClientApps.png)
+
+## 11.5. What do we call it?
+
+- REST API
+- REST Web Services
+- RESTful API
+- RESTful Web Services
+- REST Services
+- RESTful Services
+- **Generally, all mean the SAME thing.**
+- [restfulapi](https://restfulapi.net/)
+
+# 12. JSON Basics - Syntax
+
+- What is JSON?
+  - **J**ava**S**cript **O**bject **N**otation
+- Lightweight data format for storing and exchanging data... plain text.
+- Language independent ... not just for **JavaScript**.
+- Can use with any programming language: **Java**, **C#**, **Python** etc...
+
+## 12.1. Simple JSON Example
+
+- Curley braces define objects in JSON.
+- Object members are name / value pairs.
+  - Delimited by colons.
+- Name is **always** in double-quotes.
+  ```json
+  {
+    "id": 14,
+    "firstName": "Jefté",
+    "lastName": "Goes",
+    "active": true
+  }
+  ```
+- `"name": value`
+
+## 12.2. JSON Values
+
+- `Numbers`: no quotes.
+- `String`: in double quotes.
+- `Boolean`: `true`, `false`
+- Nested JSON object.
+- `Array`
+- `null`
+
+## 12.3. Nested JSON Objects
+
+```json
+{
+  "id": 14,
+  "firstName": "Jefté",
+  "lastName": "Goes",
+  "active": true,
+  "address": {
+    "street": "Rua 7",
+    "city": "Salvador",
+    "state": "BA",
+    "zip": "4400000",
+    "country": "Brazil"
+  }
+}
+```
+
+## 12.4. JSON Arrays
+
+```json
+{
+  "id": 14,
+  "firstName": "Jefté",
+  "lastName": "Goes",
+  "active": true,
+  "languages": ["Java", "C#", "Python", "Javascript"]
+}
+```
+
+# 13. REST HTTP Basics
+
+- Most common use of REST is over HTTP.
+- Leverage HTTP methods for CRUD operations.
+
+| HTTP Method | CRUD Operation                           |
+| ----------- | ---------------------------------------- |
+| POST        | Create a new entity                      |
+| GET         | Read a list of entities or single entity |
+| PUT         | Update an existing entity                |
+| DELETE      | Delete an existing entity                |
+
+## 13.1. HTTP Messages
+
+Client
+My  
+CRM  
+App
+HTTP Request
+Message
+HTTP Response
+Message
+Server
+CRM  
+REST
+Service
+
+### 13.1.1. HTTP Request Message
+
+- Request line: the HTTP command.
+- Header variables: request metadata.
+- Message body: contents of message.
+  TODO: DIAGRAM
+
+### 13.1.2. HTTP Response Message
+
+- Response line: server protocol and status code.
+- Header variables: response metadata.
+- Message body: contents of message.
+  TODO: DIAGRAM
+
+## 13.2. HTTP Response - Status Codes
+
+TODO: DIAGRAM
+
+## 13.3. MIME Content Types
+
+- The message format is described by MIME content type.
+  - Multipurpose Internet Mail-Extension.
+- Basic Syntax: type/sub-type
+- Examples
+  - text/html, text/plain
+  - application/json, application/xml, ...
+
+## 13.4. Client Tool
+
+- Send HTTP requests to the REST Web Service / API.
+- Plenty of tools available: curl, Postman, Insomnia, etc ...
+
+### 13.4.1. Web Browser vs Postman/Insomnia
+
+- For simple REST testing for GET requests.
+- Web Browser and Postman/Insomnia are similar.
+- However, for advanced REST testing: POST, PUT etc ...
+- Postman/Insomnia has much better support.
+- POSTing JSON data, setting content type.
+- Passing HTTP request headers, authentication etc ...
+
+# 14. Spring REST Controller
+
+- Adds REST support.
+  ```java
+    @RestController
+    @RequestMapping("/test")
+    public class DemoRestController {
+      @GetMapping("/hello")
+      public String sayHello() {
+        return "Hello World!";
+      }
+    }
+  ```
+- Access the REST endpoint at `/test/hello`.
+- `Returns content to client`.
+
+## 14.1. Add Maven Dependency
+
+- File: `pom.xml`
+- Add Spring Boot Starter Web.
+  ```
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+  ```
+
+## 14.2. Java JSON Data Binding
+
+- Data binding is the process of converting JSON data to a Java POJO.
+- Spring uses the [Jackson Project](https://github.com/FasterXML/jackson-databind) behind the scenes.
+- Jackson handles data binding between JSON and Java POJO.
+
+## 14.3. Specialized Annotation for Services
+
+- Spring provides the `@Service` annotation.
+- `@Service` applied to Service implementations.
+- Spring will automatically register the Service implementation `component-scanning`.
+
+# 15. Spring Data REST in Spring Boot
+
+- For Spring Data REST, you only need 3 items.
+
+1. Your entity: Book
+2. `JpaRepository`: BookRepository extends `JpaRepository`
+3. Maven POM dependency for: `spring-boot-starter-data-rest`
+
+```
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-rest</artifactId>
+  </dependency>
+```
+
+- Absolutely NO CODING required.
+- Spring Data REST will scan for `JpaRepository`.
+
+## 15.1. HATEOAS
+
+- For details on [HATEOAS](https://spring.io/projects/spring-hateoas).
+- HATEOAS uses Hypertext Application Language (HAL) data format.
+  - For details on [HAL](https://en.wikipedia.org/wiki/Hypertext_Application_Language).
+
+## 15.2. Spring Data REST Configuration, Pagination and Sorting
+
+- [Spring Data REST](https://spring.io/projects/spring-data-rest)
+
+### 15.2.1. REST Endpoints
+
+- By default, Spring Data REST will create endpoints based on entity type.
+- **Simple** pluralized form.
+  - First character of Entity type is lowercase.
+  - Then just adds an "s" to the entity.
+- `public interface BookRepository extends JpaRepository<Book, Integer> {}` -> `/books`
+
+#### 15.2.1.1. Pluralized Form
+
+- Spring Data REST pluralized form is VERY simple.
+- Just adds an **s** to the entity.
+- The English language is VERY complex!
+- Spring Data REST doesn't handle:
+  | Singular | Plural |
+  | -------- | ------- |
+  | Goose | Geese |
+  | Person | People |
+  | Syllabus | Syllabi |
+  | ... | ... |
+
+#### 15.2.1.2. Problem
+
+- Spring Data REST doesn't handle complex pluralized forms.
+- In this case, you need to specify plural name.
+- What if we want to expose a different resource name?
+  - Instead of `/books` ... use `/members`.
+
+#### 15.2.1.3. Solution
+
+- Specify plural name / path with an annotation:
+  ```java
+    @RepositoryRestResource(path="members")
+    public interface BookRepository extends JpaRepository<Book, Integer> {
+    }
+  ```
+- `http://localhost:8080/members`
+
+### 15.2.2. Pagination
+
+- By default, Spring Data REST will return the first 20 elements.
+  - Page size = 20
+- We can navigate to the different pages of data using query param:
+  - ttp://localhost:8080/books?page=0
+  - http://localhost:8080/books?page=1
+  - ...
+- **Pages are zero-based**
+
+#### 15.2.2.1. Spring Data REST Configuration
+
+- Following properties available: `application.properties`
+
+| Name                               | Description                                   |
+| ---------------------------------- | --------------------------------------------- |
+| spring.data.rest.base-path         | Base path used to expose repository resources |
+| spring.data.rest.default-page-size | Default size of pages                         |
+| spring.data.rest.max-page-size     | Maximum size of pages                         |
+| ...                                | ...                                           |
+
+#### 15.2.2.2. Sample Configuration
+
+- File: `application.properties`
+  ```
+    spring.data.rest.base-path=/api # http://localhost:8080/api/books
+    spring.data.rest.default-page-size=50  # Returns 50 elements per page
+  ```
+
+### 15.2.3. Sorting
+
+- We can sort by the property names of your entity.
+- Sort by last name (ascending is default)
+  - `http://localhost:8080/books?sort=lastName`
+- Sort by first name, descending
+  - `http://localhost:8080/books?sort=firstName,desc`
+- Sort by last name, then first name, ascending
+  - `http://localhost:8080/books?sort=lastName,firstName,asc`
+
+# 16. Spring Security
 
 - **Spring Security Model**
   - Spring Security defines a framework for security.
   - Implemented using Servlet filters in the background.
   - Two methods of securing an app: declarative and programmatic.
 
-## 11.1. Servlet Filters
+## 16.1. Servlet Filters
 
 - Servlet Filters are used to pre-process / post-process web requests.
 - Servlet Filters can route web requests based on security logic.
@@ -767,25 +1147,25 @@
   - **Spring Security Workflow**
     ![Spring Security Workflow](/Images/SpringSecurityWorkflow.png)
 
-## 11.2. Security Concepts
+## 16.2. Security Concepts
 
 - **Authentication**
   - Check user id and password with credentials stored in app / db.
 - **Authorization**
   - Check to see if user has an authorized role.
 
-## 11.3. Declarative Security
+## 16.3. Declarative Security
 
 - Define application's security constraints in configuration.
   - All Java config: `@Configuration`.
 - Provides separation of concerns (SoC) between application code and security.
 
-## 11.4. Programmatic Security
+## 16.4. Programmatic Security
 
 - Spring Security provides an API for custom application coding.
 - Provides greater customization for specific app requirements.
 
-## 11.5. Enabling Spring Security
+## 16.5. Enabling Spring Security
 
 1. Edit `pom.xml` and add `spring-boot-starter-security`.
 
@@ -812,7 +1192,7 @@
   spring.security.user.password=master@123
 ```
 
-## 11.6. Authentication and Authorization
+## 16.6. Authentication and Authorization
 
 - In-memory.
 - JDBC.
@@ -820,7 +1200,7 @@
 - Custom / Pluggable.
 - Others...
 
-## 11.7. Spring Security Password Storage
+## 16.7. Spring Security Password Storage
 
 - In Spring Security, passwords are stored using a specific format: `{id}encodedPassword`
 
@@ -833,7 +1213,7 @@
 - **Password Example**
   ![Password Example](/Images/PasswordExample.png)
 
-## 11.8. Restrict Access Based on Roles
+## 16.8. Restrict Access Based on Roles
 
 ```sql
   INSERT INTO `authorities`
@@ -846,7 +1226,7 @@
   ('jefte', 'ROLE_ADMIN');
 ```
 
-## 11.9. Cross-Site Request Forgery (CSRF)
+## 16.9. Cross-Site Request Forgery (CSRF)
 
 - Spring Security can protect against **CSRF** attacks.
 - Embed additional authentication data/token into all HTML forms.
@@ -854,7 +1234,7 @@
 - Primary use case is traditional web applications (HTML forms etc ...).
   ![CSRF](/Images/CSRF.png)
 
-### 11.9.1. When to use CSRF Protection?
+### 16.9.1. When to use CSRF Protection?
 
 - The Spring Security team recommends.
   - Use **CSRF** protection for any normal browser web requests.
@@ -869,7 +1249,7 @@
   ```
 - In general, **CSRF** is not required for **stateless REST APIs** that use POST, PUT, DELETE and/or PATCH.
 
-## 11.10. Database Access
+## 16.10. Database Access
 
 - Spring Security can read user account info from database.
 - By default, you have to follow Spring Security's predefined table schemas.
@@ -879,7 +1259,7 @@
 - We will be responsible for developing the code to access the data.
   - JDBC, JPA/Hibernate etc ...
 
-## 11.11. Password Storage
+## 16.11. Password Storage
 
 - So far, our user passwords are stored in plaintext.
   - But not for production / real-time project.
@@ -891,7 +1271,7 @@
     ('jefte', '{noop}master@123', 1);
   ```
 
-### 11.11.1. Password Storage - Best Practice
+### 16.11.1. Password Storage - Best Practice
 
 - The best practice is store passwords in an encrypted format.
   ```sql
@@ -902,7 +1282,7 @@
     ('jefte', '{bcrypt}$2a$10$pexiL67R6kwy/rHOSClyZO3ZIh/uPuDoFd3EQB0WS42l1q2BDOTVm', 1);
   ```
 
-## 11.12. Spring Security Team Recommendation
+## 16.12. Spring Security Team Recommendation
 
 - Spring Security recommends using the popular **bcrypt** algorithm.
 - **bcrypt**
@@ -910,21 +1290,21 @@
   - Adds a random salt to the password for additional protection.
   - Includes support to defeat brute force attacks.
 
-## 11.13. How to Get a Bcrypt password
+## 16.13. How to Get a Bcrypt password
 
 - We have a plaintext password and you want to encrypt using bcrypt.
   - Option 1: Use a website utility to perform the encryption.
     - [Visit: /generate-bcrypt-password](https://bcrypt-generator.com/)
   - Option 2: Write Java code to perform the encryption.
 
-## 11.14. Spring Security Password Storage
+## 16.14. Spring Security Password Storage
 
 - In Spring Security, passwords are stored using a specific format: `{bcrypt}encodedPassword`
 - **Password column must be at least 68 chars wide**
   - `{bcrypt}` - 8 chars
   - encodedPassword - 60 chars
 
-## 11.15. Spring Security Login Process
+## 16.15. Spring Security Login Process
 
 1. Retrieve password from db for the user.
 2. Read the encoding algorithm id (bcrypt etc).
@@ -937,16 +1317,18 @@
 
 ![Spring Security Login Process](/Images/SpringSecurityLoginProcess.png)
 
-## 11.16. Matchers
+## 16.16. Matchers
 
 - `requestMatchers("/**")`
   - The `/**` pattern matches all routes, allowing unrestricted access.
 
-# 12. JPA
+# 17. AOP
+
+# 18. JPA
 
 [JPA Overview and Examples](https://github.com/jeftegoes/JavaJPAOverviewAndExamples)
 
-# 13. Commands - Run from Command-Line
+# 19. Commands - Run from Command-Line
 
 - During development we spend most of our time in the IDE.
 - However, we may want to run our Spring Boot app outside of the IDE.
@@ -961,7 +1343,7 @@
 - Option 2: Use Spring Boot Maven plugin
   - `mvnw spring-boot:run`
 
-## 13.1. Maven Commands
+## 19.1. Maven Commands
 
 - **Run from command prompt!**
 - Create new Maven project
@@ -971,7 +1353,7 @@
 - Test...
   - `mvn clean install -U`
 
-## 13.2. Spring commands
+## 19.2. Spring commands
 
 - List of possibilities
   - `spring init --list`
@@ -983,7 +1365,7 @@
     - spring-boot-starter-security
     - spring-boot-starter-actuator
 
-# 14. Points of attention
+# 20. Points of attention
 
 - To use `ObjectMapper (com.fasterxml.jackson.core)` class without `@Bean` is necessary:
   ```xml
