@@ -950,27 +950,33 @@ Service
 - Request line: the HTTP command.
 - Header variables: request metadata.
 - Message body: contents of message.
-  TODO: DIAGRAM
+  ![HTTP Request Message](/Images/HTTPRequestMessage.png)
 
 ### 13.1.2. HTTP Response Message
 
 - Response line: server protocol and status code.
 - Header variables: response metadata.
 - Message body: contents of message.
-  TODO: DIAGRAM
+  ![HTTP Response Message](/Images/HTTPResponseMessage.png)
 
 ## 13.2. HTTP Response - Status Codes
 
-TODO: DIAGRAM
+| Code Range | Description   |
+| ---------- | ------------- |
+| 100 - 199  | Informational |
+| 200 - 299  | Successful    |
+| 300 - 399  | Redirection   |
+| 400 - 499  | Client error  |
+| 500 - 599  | Server error  |
 
 ## 13.3. MIME Content Types
 
 - The message format is described by MIME content type.
   - Multipurpose Internet Mail-Extension.
-- Basic Syntax: type/sub-type
+- Basic Syntax: `type/sub-type`.
 - Examples
-  - text/html, text/plain
-  - application/json, application/xml, ...
+  - `text/html`, `text/plain`
+  - `application/json`, `application/xml`, ...
 
 ## 13.4. Client Tool
 
